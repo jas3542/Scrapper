@@ -14,10 +14,13 @@ namespace JobScapper
     class Program
     {
         private static List<Job> jobs;
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             jobs = new List<Job>();
-            jobs.AddRange(fetchDataIndeed());
+
+            var result = await fetchDataIndeed();
+            jobs.AddRange(result);
+
             if (jobs.Count() > 0)
                 Console.WriteLine("indeed count -> " + jobs.Count);
             Console.ReadLine();
@@ -25,7 +28,7 @@ namespace JobScapper
 
         }
 
-        private static List<Job> fetchDataIndeed()
+        private async static Task<List<Job>> fetchDataIndeed()
         {
             List<Job> jobsIndeed = new List<Job>();
 
@@ -46,10 +49,9 @@ namespace JobScapper
 
             foreach (var job in job_nodes)
             {
-                jobsIndeed.Add(buildJobsList(job, links.Indeed.DomainURL).Result);
-                
-                //jobsIndeed.Add(jobFound);
-
+                var jobFound = await buildJobsList(job, links.Indeed.DomainURL);
+                jobsIndeed.Add(jobFound);
+               
             }
             return jobsIndeed;
         }
