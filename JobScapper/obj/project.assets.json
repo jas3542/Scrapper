@@ -3419,9 +3419,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScapper.csproj",
-      "projectName": "JobScapper",
-      "projectPath": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScapper.csproj",
+      "projectUniqueName": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScaper.csproj",
+      "projectName": "JobScaper",
+      "projectPath": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScaper.csproj",
       "packagesPath": "C:\\Users\\Jas\\.nuget\\packages\\",
       "outputPath": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\obj\\",
       "projectStyle": "PackageReference",
