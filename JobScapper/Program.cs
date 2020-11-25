@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using JobScaper.DBContext;
 using JobScaper.Scrapers;
 using JobScapper.Objects;
 using Newtonsoft.Json;
@@ -17,23 +18,33 @@ namespace JobScapper
         private static List<Job> jobs;
         static async Task Main(string[] args)
         {
-            jobs = new List<Job>();
-            IndeedScraper indeedScraper = new IndeedScraper();
-            var result = await indeedScraper.fetchDataIndeed();
-            jobs.AddRange(result);
+            //jobs = new List<Job>();
+            //IndeedScraper indeedScraper = new IndeedScraper();
+            //var result = await indeedScraper.fetchDataIndeed();
+            //jobs.AddRange(result);
 
-            if (jobs.Count() > 0)
-                Console.WriteLine("indeed count -> " + jobs.Count);
+            //if (jobs.Count() > 0) { 
+                using (var context = new DBScraperContext())
+                {
+                //await context.AddRangeAsync(jobs);
+                Job j = new Job();
+                j.Company = "test1";
+                j.ScrappedCompanyName = "aaaa";
+                j.JobDescriptionLink = "lol";
+                j.JobDetailedDescription = "idk";
+                j.Location = "still idk";
+                j.Salary = "we dont do this here";
+                j.Title = "testing obs";
+                context.Add<Job>(j);
+                context.SaveChanges();
+                    Console.WriteLine("indeed count -> " + context.Jobs.Count().ToString());
+                }
+                Console.WriteLine("Indeed jobs inserted");
+           // }
+
             Console.ReadLine();
 
 
-        }
-
-        
-
-        private static List<Job> fetchDataMonster()
-        {
-            return new List<Job>();
         }
     }
 }

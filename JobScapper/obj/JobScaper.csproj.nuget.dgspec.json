@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScaper.csproj": {}
+    "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScaper.csproj": {}
   },
   "projects": {
-    "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScaper.csproj": {
+    "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScaper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScaper.csproj",
+        "projectUniqueName": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScaper.csproj",
         "projectName": "JobScaper",
-        "projectPath": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\JobScaper.csproj",
+        "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScaper.csproj",
         "packagesPath": "C:\\Users\\Jas\\.nuget\\packages\\",
-        "outputPath": "C:\\_GitHubProjects\\Scrapper\\JobScapper\\obj\\",
+        "outputPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
