@@ -1,4 +1,5 @@
 ﻿using JobScapper.Objects;
+using JobScraper.Objects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -11,6 +12,7 @@ namespace JobScaper.DBContext
     class DBScraperContext : DbContext
     {
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<UpdatedTime> updatedTime { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

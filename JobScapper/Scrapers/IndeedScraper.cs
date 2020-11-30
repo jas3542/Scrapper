@@ -26,8 +26,8 @@ namespace JobScaper.Scrapers
 
             HttpClient httpClient = new HttpClient();
             HtmlWeb web_client = new HtmlWeb();
-            var doc = web_client.Load(indeed_url);
-            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'result')]");
+            var doc = await web_client.LoadFromWebAsync(indeed_url);
+            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'row')]");
 
             // Pagination if any:
             var pagination = doc.DocumentNode.SelectNodes("//ul[contains(@class,'pagination-list')]");
@@ -37,40 +37,43 @@ namespace JobScaper.Scrapers
             }
             // end Pagination
 
-            foreach (var job in job_nodes)
-            {
-                var jobFound = await buildIndeedJobsList(job, links.Indeed.DomainURL);
-                jobsIndeed.Add(jobFound);
-
-            }
+            jobsIndeed = await buildIndeedJobsList(job_nodes, links.Indeed.DomainURL);
+            
             return jobsIndeed;
         }
 
-        private async Task<Job> buildIndeedJobsList(HtmlNode job, string domainUrl)
+        private Task<List<Job>> buildIndeedJobsList(HtmlNodeCollection job_nodes, string domainUrl)
         {
-            Job jobFound = new Job();
-            await Task.Run(() =>
+            List<Job> jobs_found = new List<Job>();
+
+            foreach (var job_node in job_nodes)
             {
+                Job jobFound = new Job();
                 HtmlWeb web_client = new HtmlWeb();
 
-
                 //jobFound.ScrappedCompanyName = "Indeed";
-                jobFound.Title = job.SelectSingleNode("//h2[contains(@class, 'title')]").InnerText;
-                jobFound.Location = job.SelectSingleNode("//div[contains(@class, 'location')]").InnerText;
-                jobFound.Company = job.SelectSingleNode("//span[contains(@class, 'company')]").InnerText;
-                jobFound.Salary = job.SelectSingleNode("//span[contains(@class, 'salaryText')]").InnerText;
-                jobFound.JobDescriptionLink = job.SelectSingleNode("//a[contains(@class, 'turnstileLink')]").GetAttributeValue("href", "");
+                if (job_node.SelectSingleNode("h2[contains(@class, 'title')]") != null)
+                    jobFound.Title = job_node.SelectSingleNode("h2[contains(@class, 'title')]").InnerText;
+                if (job_node.SelectSingleNode(".//div[contains(@class, 'location')]") != null)
+                jobFound.Location = job_node.SelectSingleNode(".//div[contains(@class, 'location')]").InnerText;
+                if (job_node.SelectSingleNode(".//span[contains(@class, 'company')]") != null)
+                    jobFound.Company = job_node.SelectSingleNode(".//span[contains(@class, 'company')]").InnerText;
+                if (job_node.SelectSingleNode(".//span[contains(@class, 'salaryText')]") != null)
+                    jobFound.Salary = job_node.SelectSingleNode(".//span[contains(@class, 'salaryText')]").InnerText;
+                if (job_node.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]") != null)
+                    jobFound.JobDescriptionLink = job_node.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]").GetAttributeValue("href", "");
 
                 if (jobFound.JobDescriptionLink != "")
                 {
                     HtmlWeb web_client2 = new HtmlWeb();
                     var docWithJobFullDescription = web_client.Load(domainUrl + jobFound.JobDescriptionLink);
-                    jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]").InnerText;
+                    if (docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]") != null)
+                        jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]").InnerText;
 
                 }
-            });
-
-            return jobFound;
+                jobs_found.Add(jobFound);
+            }
+            return Task.FromResult(jobs_found);
         }
 
     }
