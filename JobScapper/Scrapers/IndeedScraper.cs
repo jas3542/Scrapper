@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using JobScapper.Objects;
+using JobScraper.Scrapers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace JobScaper.Scrapers
 {
-    class IndeedScraper
+    class IndeedScraper : Scraper
     {
         public IndeedScraper()
         {
@@ -21,8 +22,7 @@ namespace JobScaper.Scrapers
         {
             List<Job> jobsIndeed = new List<Job>();
 
-            Link links = JsonConvert.DeserializeObject<Link>(File.ReadAllText("webLinks.json"));
-            var indeed_url = links.Indeed.createWebsiteLink();
+            var indeed_url = _IndeedLinks[0].createWebsiteLink(); //TODO delete this
 
             HttpClient httpClient = new HttpClient();
             HtmlWeb web_client = new HtmlWeb();
@@ -37,7 +37,7 @@ namespace JobScaper.Scrapers
             }
             // end Pagination
 
-            jobsIndeed = await buildIndeedJobsList(job_nodes, links.Indeed.DomainURL);
+            jobsIndeed = await buildIndeedJobsList(job_nodes, ""/*links.Indeed.DomainURL*/);
             
             return jobsIndeed;
         }

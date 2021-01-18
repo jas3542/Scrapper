@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using JobScapper.Objects;
+using JobScraper.Scrapers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,71 +8,69 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
+using JobScapper;
 
 namespace JobScaper.Scrapers
 {
-    class CWScraper
+    class CWScraper : Scraper
     {
+        private HtmlWeb _web_client;
+        private string _web_client_userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36";
         public CWScraper()
         {
-
+           Webclient
+            _web_client = new HtmlWeb();
+            _web_client.UserAgent = _web_client_userAgent;
+            _web_client.UseCookies = true;
         }
 
-        //public async Task<List<Job>> fetchDataIndeed()
-        //{
-        //    List<Job> jobsIndeed = new List<Job>();
+        public async Task<List<Job>> fetchDataCWJobs()
+        {
+            List<Job> jobsCWJobs = new List<Job>();
 
-        //    Link links = JsonConvert.DeserializeObject<Link>(File.ReadAllText("webLinks.json"));
-        //    var indeed_url = links.Indeed.createWebsiteLink();
+            var url = _CWJobsLinks[0].createWebsiteLink();
+            var initial_doc = _web_client.Load(@"http://www.cwjobs.co.uk/");
+            
+            var doc = _web_client.Load(@"http://www.cwjobs.co.uk/jobs/software-developer/in-wolverhampton?radius=0&Sort=2");
+            
+            
+            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'job')]");
 
-        //    HttpClient httpClient = new HttpClient();
-        //    HtmlWeb web_client = new HtmlWeb();
-        //    var doc = web_client.Load(indeed_url);
-        //    var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'result')]");
+            foreach (var job in job_nodes)
+            {
+                var jobFound = await buildIndeedJobsList(job, _CWJobsLinks[0].DomainURL);
+                jobsCWJobs.Add(jobFound);
 
-        //    // Pagination if any:
-        //    var pagination = doc.DocumentNode.SelectNodes("//ul[contains(@class,'pagination-list')]");
-        //    if (pagination != null)
-        //    {
-        //        var pagination_nodes = pagination[0].ChildNodes;
-        //    }
-        //    // end Pagination
+            }
+            return jobsCWJobs;
+        }
 
-        //    foreach (var job in job_nodes)
-        //    {
-        //        var jobFound = await buildIndeedJobsList(job, links.Indeed.DomainURL);
-        //        jobsIndeed.Add(jobFound);
+        private async Task<Job> buildIndeedJobsList(HtmlNode job, string domainUrl)
+        {
+            Job jobFound = new Job();
+            await Task.Run(() =>
+            {
+                //jobFound.ScrappedCompanyName = "CwJobs";
+                jobFound.Title = job.SelectSingleNode("//div[contains(@class,'job-title')]/a").InnerText;
+                jobFound.Location = job.SelectSingleNode("//div[contains(@class, 'location')]/span").InnerText;
+                jobFound.Company = job.SelectSingleNode("//li[contains(@class, 'company')]/h3/a").InnerText;
+                jobFound.Salary = job.SelectSingleNode("//li[contains(@class, 'salary')]").InnerText;
+                jobFound.JobDescriptionLink = job.SelectSingleNode("//div[contains(@class,'job-title')]/a").GetAttributeValue("href", "");
 
-        //    }
-        //    return jobsIndeed;
-        //}
+                if (jobFound.JobDescriptionLink != "")
+                {
+                    var docWithJobFullDescription = _web_client.Load(jobFound.JobDescriptionLink);
 
-        //private async Task<Job> buildIndeedJobsList(HtmlNode job, string domainUrl)
-        //{
-        //    Job jobFound = new Job();
-        //    await Task.Run(() =>
-        //    {
-        //        HtmlWeb web_client = new HtmlWeb();
+                    _web_client.UserAgent = _web_client_userAgent;
+                    Console.WriteLine("hello/n");
+                    jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'job-description')]").InnerText;
 
+                }
+            });
 
-        //        //jobFound.ScrappedCompanyName = "Indeed";
-        //        jobFound.Title = job.SelectSingleNode("//h2[contains(@class, 'title')]").InnerText;
-        //        jobFound.Location = job.SelectSingleNode("//div[contains(@class, 'location')]").InnerText;
-        //        jobFound.Company = job.SelectSingleNode("//span[contains(@class, 'company')]").InnerText;
-        //        jobFound.Salary = job.SelectSingleNode("//span[contains(@class, 'salaryText')]").InnerText;
-        //        jobFound.JobDescriptionLink = job.SelectSingleNode("//a[contains(@class, 'turnstileLink')]").GetAttributeValue("href", "");
-
-        //        if (jobFound.JobDescriptionLink != "")
-        //        {
-        //            HtmlWeb web_client2 = new HtmlWeb();
-        //            var docWithJobFullDescription = web_client.Load(domainUrl + jobFound.JobDescriptionLink);
-        //            jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]").InnerText;
-
-        //        }
-        //    });
-
-        //    return jobFound;
-        //}
+            return jobFound;
+        }
 
     }
 }

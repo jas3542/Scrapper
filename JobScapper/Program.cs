@@ -15,30 +15,36 @@ namespace JobScapper
         static async Task Main(string[] args)
         {
             jobs = new List<Job>();
-            IndeedScraper indeedScraper = new IndeedScraper();
-            var result = await indeedScraper.fetchDataIndeed();
-            jobs.AddRange(result);
 
-            if (jobs.Count() > 0)
-            {
-                using (var context = new DBScraperContext())
-                {
-                    // TODO: This line should be changed in the future: 
-                    // context.Jobs.RemoveRange(context.Jobs);
+            CWScraper CwJobsScraper = new CWScraper();
+            var result = await CwJobsScraper.fetchDataCWJobs();
 
-                    await context.AddRangeAsync(jobs);
-                    var timeOfInserting = context.updatedTime.Select(t => t).FirstOrDefault();
-                    if (timeOfInserting != null)
-                        context.updatedTime.Remove(timeOfInserting);
-                    UpdatedTime todays_date = new UpdatedTime();
-                    todays_date.Time = DateTime.Now.ToShortDateString();
-                    context.updatedTime.Add(todays_date);
 
-                    context.SaveChanges();
-                    Console.WriteLine("jobs inserted -> " + context.Jobs.Count().ToString());
-                }
-                
-            }
+
+            //IndeedScraper indeedScraper = new IndeedScraper();
+            //var result = await indeedScraper.fetchDataIndeed();
+            //jobs.AddRange(result);
+
+            //if (jobs.Count() > 0)
+            //{
+            //    using (var context = new DBScraperContext())
+            //    {
+            //        // TODO: This line should be changed in the future: 
+            //        // context.Jobs.RemoveRange(context.Jobs);
+
+            //        await context.AddRangeAsync(jobs);
+            //        var timeOfInserting = context.updatedTime.Select(t => t).FirstOrDefault();
+            //        if (timeOfInserting != null)
+            //            context.updatedTime.Remove(timeOfInserting);
+            //        UpdatedTime todays_date = new UpdatedTime();
+            //        todays_date.Time = DateTime.Now.ToShortDateString();
+            //        context.updatedTime.Add(todays_date);
+
+            //        context.SaveChanges();
+            //        Console.WriteLine("jobs inserted -> " + context.Jobs.Count().ToString());
+            //    }
+
+            //}
 
             Console.ReadLine();
 
