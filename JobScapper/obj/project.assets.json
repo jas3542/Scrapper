@@ -1317,11 +1317,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScraper.csproj",
+      "projectUniqueName": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\JobScraper.csproj",
       "projectName": "JobScraper",
-      "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScraper.csproj",
+      "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\JobScraper.csproj",
       "packagesPath": "C:\\Users\\Jas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\obj\\",
+      "outputPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1390,7 +1390,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

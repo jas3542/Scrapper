@@ -33,35 +33,38 @@ namespace JobScaper.Scrapers
             var pagination = doc.DocumentNode.SelectNodes("//ul[contains(@class,'pagination-list')]");
             if (pagination != null)
             {
-                var pagination_nodes = pagination[0].ChildNodes;
+                var pagination_nodes = pagination[0].ChildNodes; // Child nodes are the pagination pages (1,2,3).
             }
             // end Pagination
 
-            jobsIndeed = await buildIndeedJobsList(job_nodes, ""/*links.Indeed.DomainURL*/);
+            foreach (var job in job_nodes)
+            {
+                var jobFound = await buildIndeedJobsList(job, _CWJobsLinks[0].DomainURL);
+                jobsIndeed.Add(jobFound);
+            }
+            
             
             return jobsIndeed;
         }
 
-        private Task<List<Job>> buildIndeedJobsList(HtmlNodeCollection job_nodes, string domainUrl)
+        private async Task<Job> buildIndeedJobsList(HtmlNode job, string domainUrl)
         {
-            List<Job> jobs_found = new List<Job>();
-
-            foreach (var job_node in job_nodes)
+            Job jobFound = new Job();
+            await Task.Run(() =>
             {
-                Job jobFound = new Job();
                 HtmlWeb web_client = new HtmlWeb();
 
                 //jobFound.ScrappedCompanyName = "Indeed";
-                if (job_node.SelectSingleNode("h2[contains(@class, 'title')]") != null)
-                    jobFound.Title = job_node.SelectSingleNode("h2[contains(@class, 'title')]").InnerText;
-                if (job_node.SelectSingleNode(".//div[contains(@class, 'location')]") != null)
-                jobFound.Location = job_node.SelectSingleNode(".//div[contains(@class, 'location')]").InnerText;
-                if (job_node.SelectSingleNode(".//span[contains(@class, 'company')]") != null)
-                    jobFound.Company = job_node.SelectSingleNode(".//span[contains(@class, 'company')]").InnerText;
-                if (job_node.SelectSingleNode(".//span[contains(@class, 'salaryText')]") != null)
-                    jobFound.Salary = job_node.SelectSingleNode(".//span[contains(@class, 'salaryText')]").InnerText;
-                if (job_node.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]") != null)
-                    jobFound.JobDescriptionLink = job_node.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]").GetAttributeValue("href", "");
+                if (job.SelectSingleNode("h2[contains(@class, 'title')]") != null)
+                    jobFound.Title = job.SelectSingleNode("h2[contains(@class, 'title')]").InnerText;
+                if (job.SelectSingleNode(".//div[contains(@class, 'location')]") != null)
+                    jobFound.Location = job.SelectSingleNode(".//div[contains(@class, 'location')]").InnerText;
+                if (job.SelectSingleNode(".//span[contains(@class, 'company')]") != null)
+                    jobFound.Company = job.SelectSingleNode(".//span[contains(@class, 'company')]").InnerText;
+                if (job.SelectSingleNode(".//span[contains(@class, 'salaryText')]") != null)
+                    jobFound.Salary = job.SelectSingleNode(".//span[contains(@class, 'salaryText')]").InnerText;
+                if (job.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]") != null)
+                    jobFound.JobDescriptionLink = job.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]").GetAttributeValue("href", "");
 
                 if (jobFound.JobDescriptionLink != "")
                 {
@@ -71,9 +74,9 @@ namespace JobScaper.Scrapers
                         jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]").InnerText;
 
                 }
-                jobs_found.Add(jobFound);
-            }
-            return Task.FromResult(jobs_found);
+            });
+
+            return jobFound;
         }
 
     }

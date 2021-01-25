@@ -16,14 +16,14 @@ namespace JobScapper
         {
             jobs = new List<Job>();
 
-            CWScraper CwJobsScraper = new CWScraper();
-            var result = await CwJobsScraper.fetchDataCWJobs();
+            //CWScraper CwJobsScraper = new CWScraper();
+            //var result = await CwJobsScraper.fetchDataCWJobs();
 
 
 
-            //IndeedScraper indeedScraper = new IndeedScraper();
-            //var result = await indeedScraper.fetchDataIndeed();
-            //jobs.AddRange(result);
+            IndeedScraper indeedScraper = new IndeedScraper();
+            var result = await indeedScraper.fetchDataIndeed();
+            jobs.AddRange(result);
 
             //if (jobs.Count() > 0)
             //{
