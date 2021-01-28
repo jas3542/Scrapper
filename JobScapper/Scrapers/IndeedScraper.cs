@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using JobScapper;
 using JobScapper.Objects;
 using JobScraper.Scrapers;
 using Newtonsoft.Json;
@@ -30,11 +31,9 @@ namespace JobScaper.Scrapers
             var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'row')]");
 
             // Pagination if any:
-            var pagination = doc.DocumentNode.SelectNodes("//ul[contains(@class,'pagination-list')]");
-            if (pagination != null)
-            {
-                var pagination_nodes = pagination[0].ChildNodes; // Child nodes are the pagination pages (1,2,3).
-            }
+            
+            await this.getJobsFromOtherPages(doc);
+            
             // end Pagination
 
             foreach (var job in job_nodes)
@@ -45,6 +44,35 @@ namespace JobScaper.Scrapers
             
             
             return jobsIndeed;
+        }
+
+        /// <summary>
+        /// Fetches jobs from other pages
+        /// </summary>
+        /// <param name="pagination"> The pages list</param>
+        /// <returns></returns>
+        private async Task<IList<Job>> getJobsFromOtherPages(HtmlDocument doc)
+        {
+            List<Job> listJobs = new List<Job>();
+
+            var pagination = doc.DocumentNode.SelectNodes("//ul[contains(@class,'pagination-list')]");
+            if (pagination != null)
+            {
+                var pagination_nodes = pagination[0].ChildNodes; // Child nodes are the pagination pages (1,2,3).
+                if (pagination_nodes.Count > 0)
+                {
+                    var child_nodes = pagination_nodes[pagination_nodes.Count - 1].ChildNodes;
+                    var next_btn_href = child_nodes[0].GetAttributeValue("href", "");
+                    if (next_btn_href != "")
+                    {
+                        HtmlWeb web_client = new HtmlWeb();
+                        string nexyPage_url = _IndeedLinks[0].DomainURL + "/" + next_btn_href;
+                        var new_document = await web_client.LoadFromWebAsync(nexyPage_url);
+                        var job_nodes = new_document.DocumentNode.SelectNodes("//div[contains(@class, 'row')]");
+                    }
+                }
+            }
+            return listJobs;
         }
 
         private async Task<Job> buildIndeedJobsList(HtmlNode job, string domainUrl)

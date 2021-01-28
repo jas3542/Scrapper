@@ -24,5 +24,6 @@ namespace JobScapper
 
             return link;
         }
+
     }
 }
