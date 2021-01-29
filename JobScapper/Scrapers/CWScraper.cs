@@ -14,6 +14,7 @@ using System.Net.Http;
 
 namespace JobScaper.Scrapers
 {
+    // TODO: Pagination is not added yet
     class CWScraper : Scraper
     {
         private HtmlWeb _web_client;
@@ -48,9 +49,10 @@ namespace JobScaper.Scrapers
             List<Job> jobsCWJobs = new List<Job>();
 
             var url = _CWJobsLinks[0].createWebsiteLink();
-            var doc = _web_client.Load(@"https://www.cwjobs.co.uk/jobs/software-developer/in-wolverhampton?radius=0&Sort=2");
+            var doc = _web_client.Load(url);
 
             var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'job')]").Where(item => item.Id != "" && item.Id != null).ToList();
+            
             foreach (var job in job_nodes)
             {
                 var jobFound = await buildCWJobsList(job, _CWJobsLinks[0].DomainURL);

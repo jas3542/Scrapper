@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,20 +26,26 @@ namespace JobScaper.Scrapers
 
             var indeed_url = _IndeedLinks[0].createWebsiteLink(); //TODO delete this
 
-            HttpClient httpClient = new HttpClient();
             HtmlWeb web_client = new HtmlWeb();
             var doc = await web_client.LoadFromWebAsync(indeed_url);
-            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'row')]");
+            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'row')]").ToList();
 
             // Pagination if any:
-            
-            await this.getJobsFromOtherPages(doc);
-            
+            var next_btn_href = this.getJobsFromOtherPages(doc);
+            while (next_btn_href != "" && next_btn_href != null)
+            {
+                string nexyPage_url = _IndeedLinks[0].DomainURL + "/" + next_btn_href;
+                var new_document = await web_client.LoadFromWebAsync(nexyPage_url);
+                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//div[contains(@class, 'row')]");
+                job_nodes.AddRange(job_nodes_other_pages);
+
+                next_btn_href = this.getJobsFromOtherPages(new_document);
+            }
             // end Pagination
 
             foreach (var job in job_nodes)
             {
-                var jobFound = await buildIndeedJobsList(job, _CWJobsLinks[0].DomainURL);
+                var jobFound = await buildIndeedJobsList(job, _IndeedLinks[0].DomainURL);
                 jobsIndeed.Add(jobFound);
             }
             
@@ -51,9 +58,9 @@ namespace JobScaper.Scrapers
         /// </summary>
         /// <param name="pagination"> The pages list</param>
         /// <returns></returns>
-        private async Task<IList<Job>> getJobsFromOtherPages(HtmlDocument doc)
+        private string getJobsFromOtherPages(HtmlDocument doc)
         {
-            List<Job> listJobs = new List<Job>();
+            //List<Job> listJobs = new List<Job>();
 
             var pagination = doc.DocumentNode.SelectNodes("//ul[contains(@class,'pagination-list')]");
             if (pagination != null)
@@ -63,16 +70,12 @@ namespace JobScaper.Scrapers
                 {
                     var child_nodes = pagination_nodes[pagination_nodes.Count - 1].ChildNodes;
                     var next_btn_href = child_nodes[0].GetAttributeValue("href", "");
-                    if (next_btn_href != "")
-                    {
-                        HtmlWeb web_client = new HtmlWeb();
-                        string nexyPage_url = _IndeedLinks[0].DomainURL + "/" + next_btn_href;
-                        var new_document = await web_client.LoadFromWebAsync(nexyPage_url);
-                        var job_nodes = new_document.DocumentNode.SelectNodes("//div[contains(@class, 'row')]");
-                    }
+                    
+                    return next_btn_href;
                 }
             }
-            return listJobs;
+            return "";
+            //return listJobs;
         }
 
         private async Task<Job> buildIndeedJobsList(HtmlNode job, string domainUrl)
