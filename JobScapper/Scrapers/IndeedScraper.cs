@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Jobs.Data.Objects;
 using JobScapper;
 using JobScapper.Objects;
 using JobScraper.Scrapers;

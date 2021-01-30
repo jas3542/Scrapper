@@ -1,7 +1,6 @@
-﻿using JobScaper.DBContext;
+﻿using Jobs.Data.Objects;
+using JobScaper.Data;
 using JobScaper.Scrapers;
-using JobScapper.Objects;
-using JobScraper.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,50 +15,38 @@ namespace JobScapper
         {
             jobs = new List<Job>();
 
-            CWScraper CwJobsScraper = new CWScraper();
-            var result = await CwJobsScraper.fetchDataCWJobs();
+            //CWScraper CwJobsScraper = new CWScraper();
+            //var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
+            //jobs.AddRange(result_cwjobs);
 
+            IndeedScraper indeedScraper = new IndeedScraper();
+            var result_indeed = await indeedScraper.fetchDataIndeed();
+            jobs.AddRange(result_indeed);
 
+            if (jobs.Count() > 0)
+            {
+                using (var context = new DBScraperContext())
+                {
+                    // TODO: This line should be changed in the future: 
+                    // context.Jobs.RemoveRange(context.Jobs);
 
-            //IndeedScraper indeedScraper = new IndeedScraper();
-            //var result = await indeedScraper.fetchDataIndeed();
-            jobs.AddRange(result);
+                    await context.AddRangeAsync(jobs);
+                    var timeOfInserting = context.updatedTime.Select(t => t).FirstOrDefault();
+                    if (timeOfInserting != null)
+                        context.updatedTime.Remove(timeOfInserting);
+                    UpdatedTime todays_date = new UpdatedTime();
+                    todays_date.Time = DateTime.Now.ToShortDateString();
+                    context.updatedTime.Add(todays_date);
 
-            //if (jobs.Count() > 0)
-            //{
-            //    using (var context = new DBScraperContext())
-            //    {
-            //        // TODO: This line should be changed in the future: 
-            //        // context.Jobs.RemoveRange(context.Jobs);
+                    context.SaveChanges();
+                    Console.WriteLine("total jobs inserted -> " + context.Jobs.Count().ToString());
+                }
 
-            //        await context.AddRangeAsync(jobs);
-            //        var timeOfInserting = context.updatedTime.Select(t => t).FirstOrDefault();
-            //        if (timeOfInserting != null)
-            //            context.updatedTime.Remove(timeOfInserting);
-            //        UpdatedTime todays_date = new UpdatedTime();
-            //        todays_date.Time = DateTime.Now.ToShortDateString();
-            //        context.updatedTime.Add(todays_date);
+            }
 
-            //        context.SaveChanges();
-            //        Console.WriteLine("jobs inserted -> " + context.Jobs.Count().ToString());
-            //    }
-
-            //}
-
-            Console.ReadLine();
+            // Console.ReadLine();
 
 
         }
     }
 }
-
-
-//Job j = new Job();
-//j.Company = "test1";
-//j.ScrappedCompanyName = "aaaa";
-//j.JobDescriptionLink = "lol";
-//j.JobDetailedDescription = "idk";
-//j.Location = "still idk";
-//j.Salary = "we dont do this here";
-//j.Title = "testing obs";
-//context.Add<Job>(j);

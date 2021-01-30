@@ -1,5 +1,4 @@
-﻿using JobScapper.Objects;
-using JobScraper.Objects;
+﻿using Jobs.Data.Objects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -7,9 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace JobScaper.DBContext
+namespace JobScaper.Data
 {
-    class DBScraperContext : DbContext
+    public class DBScraperContext : DbContext
     {
         public DbSet<Job> Jobs { get; set; }
         public DbSet<UpdatedTime> updatedTime { get; set; }

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace JobScraper.Objects
+namespace Jobs.Data.Objects
 {
-    class UpdatedTime
+    public class UpdatedTime
     {
         [Key]
         public int ID { get; set; }

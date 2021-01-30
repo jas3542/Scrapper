@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace JobScapper.Objects
+namespace Jobs.Data.Objects
 {
-    class Job
+    public class Job
     {
         public Job()
         {

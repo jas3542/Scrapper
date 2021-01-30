@@ -11,6 +11,7 @@ using System.Linq;
 using JobScapper;
 using System.Net;
 using System.Net.Http;
+using Jobs.Data.Objects;
 
 namespace JobScaper.Scrapers
 {

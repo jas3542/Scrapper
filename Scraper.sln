@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobScraper", "JobScapper\JobScraper.csproj", "{24AF2533-8EC4-4264-AE7E-8954D17C5058}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobs.Data", "Jobs.Data\Jobs.Data.csproj", "{10841F2C-5396-4CFF-BE30-C7D74ACADFCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs.Api", "Jobs.Api\Jobs.Api.csproj", "{35FE9396-4832-46F0-A890-1559C788C757}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{24AF2533-8EC4-4264-AE7E-8954D17C5058}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24AF2533-8EC4-4264-AE7E-8954D17C5058}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24AF2533-8EC4-4264-AE7E-8954D17C5058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10841F2C-5396-4CFF-BE30-C7D74ACADFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10841F2C-5396-4CFF-BE30-C7D74ACADFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10841F2C-5396-4CFF-BE30-C7D74ACADFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10841F2C-5396-4CFF-BE30-C7D74ACADFCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FE9396-4832-46F0-A890-1559C788C757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FE9396-4832-46F0-A890-1559C788C757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FE9396-4832-46F0-A890-1559C788C757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FE9396-4832-46F0-A890-1559C788C757}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

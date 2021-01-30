@@ -22,7 +22,7 @@ namespace JobScraper.Scrapers
                 .Select(i => new CWJobsLink(i.Searched, i.Location, i.Radius, i.Sort, i.DomainURL)).ToList();
 
             _IndeedLinks = _links.Where(item => item.Platform.Equals("Indeed"))
-                .Select(i => new IndeedLink(i.Searched, i.Location, i.Radius, i.Sort, i.DomainURL)).ToList();
+                .Select(i => new IndeedLink(i.Searched, i.Location, i.Radius, i.Sort, i.DomainURL, i.FromAge)).ToList();
 
         }
 

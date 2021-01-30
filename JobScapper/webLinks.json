@@ -5,7 +5,8 @@
       "Location": "London",
       "Radius": "5",
       "Sort": "date",
-      "DomainURL": "http://www.indeed.co.uk"
+      "DomainURL": "http://www.indeed.co.uk",
+      "FromAge":  "3" // get last 3 days results
     },
     {
       "Platform": "CWJobs",
