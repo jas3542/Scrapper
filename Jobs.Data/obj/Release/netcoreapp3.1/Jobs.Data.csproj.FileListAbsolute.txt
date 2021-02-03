@@ -1,0 +1,10 @@
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\bin\Release\netcoreapp3.1\SqLite_DB\JobScraper_DB.db
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\bin\Release\netcoreapp3.1\Jobs.Data.deps.json
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\bin\Release\netcoreapp3.1\Jobs.Data.dll
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\bin\Release\netcoreapp3.1\Jobs.Data.pdb
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Release\netcoreapp3.1\Jobs.Data.csprojAssemblyReference.cache
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Release\netcoreapp3.1\Jobs.Data.AssemblyInfoInputs.cache
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Release\netcoreapp3.1\Jobs.Data.AssemblyInfo.cs
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Release\netcoreapp3.1\Jobs.Data.csproj.CoreCompileInputs.cache
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Release\netcoreapp3.1\Jobs.Data.dll
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Release\netcoreapp3.1\Jobs.Data.pdb
