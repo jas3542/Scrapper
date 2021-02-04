@@ -14,11 +14,6 @@ namespace Jobs.Api.Controllers
     [Route("[controller]")]
     public class JobsController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<JobsController> _logger;
 
         public JobsController(ILogger<JobsController> logger)
@@ -27,11 +22,14 @@ namespace Jobs.Api.Controllers
         }
 
         [HttpGet]
-        public string Get()
+        public async Task<List<Job>> Get()
         {
             using (var context = new DBScraperContext())
             {
-                return context.Jobs.Count().ToString() + "this is what i  have";
+                if (context.Jobs.Count() > 0) { 
+                    return await Task.Run(() => context.Jobs.ToList());
+                }
+                return await Task.Run(() => new List<Job>());
             }
         }
 

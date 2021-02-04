@@ -29,6 +29,7 @@ C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcor
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
@@ -66,4 +67,3 @@ C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcor
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.pdb
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.genruntimeconfig.cache
-C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
