@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobScraper", "JobScapper\Jo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobs.Data", "Jobs.Data\Jobs.Data.csproj", "{10841F2C-5396-4CFF-BE30-C7D74ACADFCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs.Api", "Jobs.Api\Jobs.Api.csproj", "{35FE9396-4832-46F0-A890-1559C788C757}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jobs.Api", "Jobs.Api\Jobs.Api.csproj", "{35FE9396-4832-46F0-A890-1559C788C757}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
