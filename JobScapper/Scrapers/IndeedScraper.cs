@@ -29,7 +29,7 @@ namespace JobScaper.Scrapers
 
             HtmlWeb web_client = new HtmlWeb();
             var doc = await web_client.LoadFromWebAsync(indeed_url);
-            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'row')]").ToList();
+            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'row')]")?.ToList();
 
             // Pagination if any:
             var next_btn_href = this.getJobsFromOtherPages(doc);

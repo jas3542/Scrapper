@@ -14,6 +14,7 @@ namespace JobScraper.Scrapers
         protected List<Link> _links { get; set; }
         protected List<CWJobsLink> _CWJobsLinks { get; set; }
         protected List<IndeedLink> _IndeedLinks { get; set; }
+        protected List<ReedLink> _ReedLinks { get; set; }
         public Scraper()
         {
             _links = JsonConvert.DeserializeObject<List<Link>>(File.ReadAllText("webLinks.json"));
@@ -24,6 +25,8 @@ namespace JobScraper.Scrapers
             _IndeedLinks = _links.Where(item => item.Platform.Equals("Indeed"))
                 .Select(i => new IndeedLink(i.Searched, i.Location, i.Radius, i.Sort, i.DomainURL, i.FromAge)).ToList();
 
+            _ReedLinks = _links.Where(item => item.Platform.Equals("Reed"))
+                .Select(i => new ReedLink(i.Searched, i.Location, i.Radius, i.Sort, i.DomainURL)).ToList();
         }
 
     }

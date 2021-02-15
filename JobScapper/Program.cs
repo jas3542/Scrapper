@@ -18,13 +18,17 @@ namespace JobScapper
         {
             jobs = new List<Job>();
 
-            CWScraper CwJobsScraper = new CWScraper();
-            var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
-            jobs.AddRange(result_cwjobs);
+            //CWScraper CwJobsScraper = new CWScraper();
+            //var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
+            //jobs.AddRange(result_cwjobs);
 
             //IndeedScraper indeedScraper = new IndeedScraper();
             //var result_indeed = await indeedScraper.fetchDataIndeed();
             //jobs.AddRange(result_indeed);
+
+            ReedScraper ReedScraper = new ReedScraper();
+            var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
+            jobs.AddRange(result_Reedjobs);
 
             if (jobs.Count() > 0)
             {
@@ -33,26 +37,6 @@ namespace JobScapper
                 client.BaseAddress = new Uri("https://localhost:44300/");
                 var response = client.PostAsync("Jobs", 
                     new StringContent(jsonString, Encoding.UTF8, "application/json")).Result;
-
-
-
-                //using (var context = new DBScraperContext())
-                //{
-                //    // TODO: This line should be changed in the future: 
-                //    // context.Jobs.RemoveRange(context.Jobs);
-
-                //    await context.AddRangeAsync(jobs);
-                //    var timeOfInserting = context.updatedTime.Select(t => t).FirstOrDefault();
-                //    if (timeOfInserting != null)
-                //        context.updatedTime.Remove(timeOfInserting);
-                //    UpdatedTime todays_date = new UpdatedTime();
-                //    todays_date.Time = DateTime.Now.ToShortDateString();
-                //    context.updatedTime.Add(todays_date);
-
-                //    context.SaveChanges();
-                //    Console.WriteLine("total jobs inserted -> " + context.Jobs.Count().ToString());
-                //}
-
             }
 
             // Console.ReadLine();

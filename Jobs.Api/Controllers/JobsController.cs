@@ -40,8 +40,8 @@ namespace Jobs.Api.Controllers
             {
                 using (var context = new DBScraperContext())
                 {
-                    // TODO: This line should be changed in the future: 
-                    // context.Jobs.RemoveRange(context.Jobs);
+                    //TODO: This line should be changed in the future: 
+                    context.Jobs.RemoveRange(context.Jobs);
 
                     await context.AddRangeAsync(jobs);
                     var timeOfInserting = context.updatedTime.Select(t => t).FirstOrDefault();
