@@ -56,6 +56,7 @@ namespace JobScaper.Scrapers
             
             foreach (var job in job_nodes)
             {
+                
                 var jobFound = await buildCWJobsList(job, _CWJobsLinks[0].DomainURL);
                 jobsCWJobs.Add(jobFound);
 
@@ -69,19 +70,20 @@ namespace JobScaper.Scrapers
             Job jobFound = new Job();
             await Task.Run(() =>
             {
+                
                 //jobFound.ScrappedCompanyName = "CwJobs";
                 jobFound.Title = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").InnerText;
                 jobFound.Location = job.SelectSingleNode(".//li[contains(@class, 'location')]").InnerText;
                 jobFound.Company = job.SelectSingleNode(".//li[contains(@class, 'company')]/h3/a").InnerText;
                 jobFound.Salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]").InnerText;
                 jobFound.JobDescriptionLink = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").GetAttributeValue("href", "");
-
+                
                 if (jobFound.JobDescriptionLink != "")
                 {
                     _web_client.PreRequest = req =>
                     {
                         //req.Headers.Add(HttpRequestHeader.UserAgent, _web_client_userAgent);
-                        //req.Headers.Add(HttpRequestHeader.Referer, "https://www.cwjobs.co.uk/jobs/software-developer/in-wolverhampton?radius=0&Sort=2");
+                        req.Headers.Add(HttpRequestHeader.Referer, "https://www.cwjobs.co.uk/jobs/software-developer/in-wolverhampton?radius=0&Sort=2");
                         //req.Timeout = 300000;
                         //req.ReadWriteTimeout = 300000;
 
@@ -95,8 +97,8 @@ namespace JobScaper.Scrapers
                     };
                     var docWithJobFullDescription = _web_client.Load(jobFound.JobDescriptionLink);
 
-                    jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[contains(@class, 'job-description')]").InnerText;
-
+                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[(@class= 'job-description')]").InnerText;
+                    jobFound.JobDetailedDescription = HtmlEntity.DeEntitize(description);
                 }
             });
 

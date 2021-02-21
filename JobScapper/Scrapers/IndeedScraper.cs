@@ -102,9 +102,10 @@ namespace JobScaper.Scrapers
                 {
                     HtmlWeb web_client2 = new HtmlWeb();
                     var docWithJobFullDescription = web_client.Load(domainUrl + jobFound.JobDescriptionLink);
-                    if (docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]") != null)
-                        jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]").InnerText;
-
+                    //if (docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]") != null)
+                    
+                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]")?.InnerText;
+                    jobFound.JobDetailedDescription = HtmlEntity.DeEntitize(description);
                 }
             });
 

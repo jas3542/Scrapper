@@ -55,7 +55,7 @@ namespace JobScaper.Scrapers
                 //jobFound.ScrappedCompanyName = "CwJobs";
                 jobFound.Title = job.SelectSingleNode(".//h3[contains(@class,'title')]").InnerText;
                 jobFound.Location = job.SelectSingleNode(".//li[contains(@class, 'location')]").InnerText;
-                jobFound.Company = job.SelectSingleNode(".//div[contains(@class, 'posted-by')]").InnerText;
+                jobFound.Company = job.SelectSingleNode(".//div[contains(@class, 'posted-by')]/a").InnerText;
                 jobFound.Salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]").InnerText;
                 jobFound.JobDescriptionLink = job.SelectSingleNode(".//a[contains(@class,'job-block-link')]").GetAttributeValue("href", "");
 
@@ -63,8 +63,8 @@ namespace JobScaper.Scrapers
                 {
                     var docWithJobFullDescription = _web_client.Load(domainUrl +"/" +jobFound.JobDescriptionLink);
 
-                    jobFound.JobDetailedDescription = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[contains(@class, 'description')]").InnerText;
-
+                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[(@class= 'description')]")?.InnerText;
+                    jobFound.JobDetailedDescription = HtmlEntity.DeEntitize(description);
                 }
             });
 

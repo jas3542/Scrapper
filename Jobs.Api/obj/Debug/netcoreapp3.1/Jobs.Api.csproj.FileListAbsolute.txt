@@ -1,7 +1,6 @@
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Jobs.Api.exe
-C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\SqLite_DB\JobScraper_DB.db
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Jobs.Api.deps.json
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Jobs.Api.runtimeconfig.json
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Jobs.Api.runtimeconfig.dev.json

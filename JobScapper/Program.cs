@@ -18,9 +18,9 @@ namespace JobScapper
         {
             jobs = new List<Job>();
 
-            //CWScraper CwJobsScraper = new CWScraper();
-            //var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
-            //jobs.AddRange(result_cwjobs);
+            CWScraper CwJobsScraper = new CWScraper();
+            var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
+            jobs.AddRange(result_cwjobs);
 
             //IndeedScraper indeedScraper = new IndeedScraper();
             //var result_indeed = await indeedScraper.fetchDataIndeed();
