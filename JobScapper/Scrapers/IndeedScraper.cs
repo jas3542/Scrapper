@@ -86,15 +86,19 @@ namespace JobScaper.Scrapers
             {
                 HtmlWeb web_client = new HtmlWeb();
 
-                //jobFound.ScrappedCompanyName = "Indeed";
-                if (job.SelectSingleNode("h2[contains(@class, 'title')]") != null)
-                    jobFound.Title = job.SelectSingleNode("h2[contains(@class, 'title')]").InnerText;
+                jobFound.ScrappedCompanyName = "Indeed";
+                if (job.SelectSingleNode("h2[contains(@class, 'title')]") != null) {
+                    string title = job.SelectSingleNode("h2[contains(@class, 'title')]").InnerText;
+                    jobFound.Title = HtmlEntity.DeEntitize(title);
+                }
                 if (job.SelectSingleNode(".//div[contains(@class, 'location')]") != null)
                     jobFound.Location = job.SelectSingleNode(".//div[contains(@class, 'location')]").InnerText;
                 if (job.SelectSingleNode(".//span[contains(@class, 'company')]") != null)
                     jobFound.Company = job.SelectSingleNode(".//span[contains(@class, 'company')]").InnerText;
-                if (job.SelectSingleNode(".//span[contains(@class, 'salaryText')]") != null)
-                    jobFound.Salary = job.SelectSingleNode(".//span[contains(@class, 'salaryText')]").InnerText;
+                if (job.SelectSingleNode(".//span[contains(@class, 'salaryText')]") != null) { 
+                    string salary = job.SelectSingleNode(".//span[contains(@class, 'salaryText')]").InnerText;
+                    jobFound.Salary = HtmlEntity.DeEntitize(salary);
+                }
                 if (job.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]") != null)
                     jobFound.JobDescriptionLink = job.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]").GetAttributeValue("href", "");
 
@@ -104,7 +108,7 @@ namespace JobScaper.Scrapers
                     var docWithJobFullDescription = web_client.Load(domainUrl + jobFound.JobDescriptionLink);
                     //if (docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]") != null)
                     
-                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]")?.InnerText;
+                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]")?.InnerHtml;
                     jobFound.JobDetailedDescription = HtmlEntity.DeEntitize(description);
                 }
             });

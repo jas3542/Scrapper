@@ -6,4 +6,3 @@ C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Debug\netco
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.csproj.CoreCompileInputs.cache
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.pdb
-C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.csprojAssemblyReference.cache

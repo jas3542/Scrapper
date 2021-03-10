@@ -12,6 +12,7 @@ using JobScapper;
 using System.Net;
 using System.Net.Http;
 using Jobs.Data.Objects;
+using System.Text.RegularExpressions;
 
 namespace JobScaper.Scrapers
 {
@@ -71,11 +72,13 @@ namespace JobScaper.Scrapers
             await Task.Run(() =>
             {
                 
-                //jobFound.ScrappedCompanyName = "CwJobs";
-                jobFound.Title = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").InnerText;
+                jobFound.ScrappedCompanyName = "CwJobs";
+                string title = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").InnerText;
+                jobFound.Title = HtmlEntity.DeEntitize(title);
                 jobFound.Location = job.SelectSingleNode(".//li[contains(@class, 'location')]").InnerText;
                 jobFound.Company = job.SelectSingleNode(".//li[contains(@class, 'company')]/h3/a").InnerText;
-                jobFound.Salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]").InnerText;
+                string salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]").InnerText;
+                jobFound.Salary = HtmlEntity.DeEntitize(salary);
                 jobFound.JobDescriptionLink = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").GetAttributeValue("href", "");
                 
                 if (jobFound.JobDescriptionLink != "")
@@ -97,7 +100,7 @@ namespace JobScaper.Scrapers
                     };
                     var docWithJobFullDescription = _web_client.Load(jobFound.JobDescriptionLink);
 
-                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[(@class= 'job-description')]").InnerText;
+                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[(@class= 'job-description')]").InnerHtml;
                     jobFound.JobDetailedDescription = HtmlEntity.DeEntitize(description);
                 }
             });
