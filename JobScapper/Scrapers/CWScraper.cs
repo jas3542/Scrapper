@@ -13,6 +13,7 @@ using System.Net;
 using System.Net.Http;
 using Jobs.Data.Objects;
 using System.Text.RegularExpressions;
+using JobScraper;
 
 namespace JobScaper.Scrapers
 {
@@ -24,10 +25,13 @@ namespace JobScaper.Scrapers
         
         private CookieContainer _cookieContainer;
         private Cookie _cookie;
+        
+        private LocationService _service;
 
-        public CWScraper()
+        public CWScraper(LocationService service = null)
         {
             this.CreateCookieContainerWithCookie();
+            _service = service;
 
             _web_client = new HtmlWeb();
             _web_client.UserAgent = _web_client_userAgent;
@@ -48,6 +52,7 @@ namespace JobScaper.Scrapers
         }
         public async Task<List<Job>> fetchDataCWJobs()
         {
+            var test = _service.getCityPostcode("London");
             List<Job> jobsCWJobs = new List<Job>();
 
             var url = _CWJobsLinks[0].createWebsiteLink();
@@ -75,7 +80,7 @@ namespace JobScaper.Scrapers
                 jobFound.ScrappedCompanyName = "CwJobs";
                 string title = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").InnerText;
                 jobFound.Title = HtmlEntity.DeEntitize(title);
-                jobFound.Location = job.SelectSingleNode(".//li[contains(@class, 'location')]").InnerText;
+                jobFound.Location = job.SelectSingleNode(".//li[contains(@class, 'location')]/span").InnerText;
                 jobFound.Company = job.SelectSingleNode(".//li[contains(@class, 'company')]/h3/a").InnerText;
                 string salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]").InnerText;
                 jobFound.Salary = HtmlEntity.DeEntitize(salary);

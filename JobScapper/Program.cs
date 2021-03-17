@@ -1,6 +1,7 @@
 ﻿using Jobs.Data.Objects;
 using JobScaper.Api;
 using JobScaper.Scrapers;
+using JobScraper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,9 @@ namespace JobScapper
         static async Task Main(string[] args)
         {
             jobs = new List<Job>();
+            LocationService service = new LocationService();
 
-            CWScraper CwJobsScraper = new CWScraper();
+            CWScraper CwJobsScraper = new CWScraper(service);
             var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
             jobs.AddRange(result_cwjobs);
 
@@ -26,9 +28,9 @@ namespace JobScapper
             //var result_indeed = await indeedScraper.fetchDataIndeed();
             //jobs.AddRange(result_indeed);
 
-            ReedScraper ReedScraper = new ReedScraper();
-            var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
-            jobs.AddRange(result_Reedjobs);
+            //ReedScraper ReedScraper = new ReedScraper();
+            //var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
+            //jobs.AddRange(result_Reedjobs);
 
             if (jobs.Count() > 0)
             {
