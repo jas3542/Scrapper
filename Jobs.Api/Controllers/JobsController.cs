@@ -142,6 +142,7 @@ namespace Jobs.Api.Controllers
                 {
                     //TODO: This line should be changed in the future: 
                     context.Jobs.RemoveRange(context.Jobs);
+                    await context.SaveChangesAsync();
 
                     await context.AddRangeAsync(jobs);
                     var timeOfInserting = context.updatedTime.Select(t => t).FirstOrDefault();

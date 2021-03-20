@@ -16,6 +16,10 @@ namespace Jobs.Data.Objects
         public string ScrappedCompanyName { get; set; }
         public string Title { get; set; }
         public string Location { get; set; }
+
+        public string PostCode { get; set; }
+        public string City { get; set; }
+        public string Borough { get; set; }
         public string Company { get; set; }
         public string Salary { get; set; }
         public string JobDescriptionLink { get; set; }

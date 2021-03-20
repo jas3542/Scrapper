@@ -52,7 +52,7 @@ namespace JobScaper.Scrapers
         }
         public async Task<List<Job>> fetchDataCWJobs()
         {
-            var test = _service.getCityPostcode("London");
+            
             List<Job> jobsCWJobs = new List<Job>();
 
             var url = _CWJobsLinks[0].createWebsiteLink();
@@ -62,10 +62,8 @@ namespace JobScaper.Scrapers
             
             foreach (var job in job_nodes)
             {
-                
                 var jobFound = await buildCWJobsList(job, _CWJobsLinks[0].DomainURL);
                 jobsCWJobs.Add(jobFound);
-
             }
 
             return jobsCWJobs;
@@ -80,7 +78,25 @@ namespace JobScaper.Scrapers
                 jobFound.ScrappedCompanyName = "CwJobs";
                 string title = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").InnerText;
                 jobFound.Title = HtmlEntity.DeEntitize(title);
-                jobFound.Location = job.SelectSingleNode(".//li[contains(@class, 'location')]/span").InnerText;
+                var location = job.SelectSingleNode(".//li[contains(@class, 'location')]/span").InnerText;
+                jobFound.Location = location;
+                if (location.Split(",")[0].Any(Char.IsDigit))
+                {
+                    var l = _service.getCitynameByPostcode(HtmlEntity.DeEntitize(location.Split(",")[0]));
+                    if (l.Results != null) { 
+                        jobFound.City = l.Results[0].LocationData.Populated_place;
+                    }
+                }
+                else
+                {
+                    var l = _service.getPostcodeByCityname(HtmlEntity.DeEntitize(location.Split(",")[0]));
+                    if (l.Results != null) { 
+                        jobFound.Borough = l.Results[0].LocationData.Name;
+                    }
+                }
+                
+
+
                 jobFound.Company = job.SelectSingleNode(".//li[contains(@class, 'company')]/h3/a").InnerText;
                 string salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]").InnerText;
                 jobFound.Salary = HtmlEntity.DeEntitize(salary);
