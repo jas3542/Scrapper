@@ -74,28 +74,17 @@ namespace JobScaper.Scrapers
             Job jobFound = new Job();
             await Task.Run(() =>
             {
-                
                 jobFound.ScrappedCompanyName = "CwJobs";
                 string title = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").InnerText;
                 jobFound.Title = HtmlEntity.DeEntitize(title);
                 var location = job.SelectSingleNode(".//li[contains(@class, 'location')]/span").InnerText;
                 jobFound.Location = location;
-                if (location.Split(",")[0].Any(Char.IsDigit))
-                {
-                    var l = _service.getCitynameByPostcode(HtmlEntity.DeEntitize(location.Split(",")[0]));
-                    if (l.Results != null) { 
-                        jobFound.City = l.Results[0].LocationData.Populated_place;
-                    }
-                }
-                else
-                {
-                    var l = _service.getPostcodeByCityname(HtmlEntity.DeEntitize(location.Split(",")[0]));
-                    if (l.Results != null) { 
-                        jobFound.Borough = l.Results[0].LocationData.Name;
-                    }
-                }
+                var l = _service.getBorough(HtmlEntity.DeEntitize(location.Split(",")[0]));
                 
-
+                if (l.Results != null)
+                {
+                    jobFound.Borough = l.Results.Where(l => l.LocationData.District_borough != null).FirstOrDefault().LocationData.District_borough;
+                }
 
                 jobFound.Company = job.SelectSingleNode(".//li[contains(@class, 'company')]/h3/a").InnerText;
                 string salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]").InnerText;
