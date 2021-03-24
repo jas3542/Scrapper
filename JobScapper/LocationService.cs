@@ -40,7 +40,7 @@ namespace JobScraper
 
         //}
 
-        public Location getBorough(string searchedPlace)
+        public Location getlocationData(string searchedPlace)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(_locationApiBaseUrl);

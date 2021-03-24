@@ -75,6 +75,10 @@ namespace Jobs.Api.Controllers
         {
             GetJobs();
 
+            if (string.IsNullOrEmpty(filterBy))
+            {
+                return Ok(_cacheJobsList);
+            }
             var filteredJobsList = new List<Job>();
             List<string> include = new List<string>();
             List<string> exclude = new List<string>();

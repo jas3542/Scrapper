@@ -21,7 +21,7 @@ namespace JobScaper.Scrapers
     class CWScraper : Scraper
     {
         private HtmlWeb _web_client;
-        private string _web_client_userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36";
+        private string _web_client_userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36";
         
         private CookieContainer _cookieContainer;
         private Cookie _cookie;
@@ -36,6 +36,23 @@ namespace JobScaper.Scrapers
             _web_client = new HtmlWeb();
             _web_client.UserAgent = _web_client_userAgent;
             _web_client.UseCookies = true;
+            _web_client.PreRequest = req =>
+            {
+                //req.Headers.Add(HttpRequestHeader.UserAgent, _web_client_userAgent);
+                req.Headers.Add(HttpRequestHeader.Referer, "https://www.cwjobs.co.uk/");
+                //req.Timeout = 300000;
+                //req.ReadWriteTimeout = 300000;
+                
+                req.Headers.Add(HttpRequestHeader.Host, "www.cwjobs.co.uk");
+                req.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate, br");
+                req.Headers.Add(HttpRequestHeader.AcceptLanguage, "es-ES,es;q=0.9");
+                req.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+                //req.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
+                //req.Headers.Add("upgrade-insecure-requests", "1");
+
+                req.CookieContainer = _cookieContainer;
+                return true;
+            };
         }
 
         /// <summary>
@@ -45,8 +62,8 @@ namespace JobScaper.Scrapers
         {
             _cookieContainer = new CookieContainer();
 
-            // Expires in year 2025:
-            _cookie = new Cookie("AnonymousUser", "MemberId=c7a38036-6622-4569-b390-43a0f82220e6&IsAnonymous=True", "/", "www.cwjobs.co.uk");
+            // Expires in year 2051:
+            _cookie = new Cookie("AnonymousUser", "MemberId=932443cf-7daa-4d47-8a22-c3efc5ec70ba&IsAnonymous=True", "/", "www.cwjobs.co.uk");
             _cookieContainer.Add(_cookie);
 
         }
@@ -79,11 +96,20 @@ namespace JobScaper.Scrapers
                 jobFound.Title = HtmlEntity.DeEntitize(title);
                 var location = job.SelectSingleNode(".//li[contains(@class, 'location')]/span").InnerText;
                 jobFound.Location = location;
-                var l = _service.getBorough(HtmlEntity.DeEntitize(location.Split(",")[0]));
+                var l = _service.getlocationData(HtmlEntity.DeEntitize(location.Split(",")[0]));
                 
                 if (l.Results != null)
                 {
-                    jobFound.Borough = l.Results.Where(l => l.LocationData.District_borough != null).FirstOrDefault().LocationData.District_borough;
+                    var locationData = l.Results.FirstOrDefault().LocationData;
+                    jobFound.Borough = locationData.District_borough;
+                    if (locationData.Local_Type.ToLower() == "city")
+                    {
+                        jobFound.City = locationData.Name;
+                    }else
+                    {
+                        jobFound.City = locationData.Populated_place;
+                    }
+
                 }
 
                 jobFound.Company = job.SelectSingleNode(".//li[contains(@class, 'company')]/h3/a").InnerText;
