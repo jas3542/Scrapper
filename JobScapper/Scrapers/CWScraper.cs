@@ -21,60 +21,62 @@ namespace JobScaper.Scrapers
     class CWScraper : Scraper
     {
         private HtmlWeb _web_client;
-        private string _web_client_userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36";
-        
-        private CookieContainer _cookieContainer;
-        private Cookie _cookie;
-        
         private LocationService _service;
 
+        private WebHeaderCollection _headersCollection= null;
         public CWScraper(LocationService service = null)
         {
-            this.CreateCookieContainerWithCookie();
             _service = service;
 
             _web_client = new HtmlWeb();
-            _web_client.UserAgent = _web_client_userAgent;
-            _web_client.UseCookies = true;
-            _web_client.PreRequest = req =>
-            {
-                //req.Headers.Add(HttpRequestHeader.UserAgent, _web_client_userAgent);
-                req.Headers.Add(HttpRequestHeader.Referer, "https://www.cwjobs.co.uk/");
-                //req.Timeout = 300000;
-                //req.ReadWriteTimeout = 300000;
-                
-                req.Headers.Add(HttpRequestHeader.Host, "www.cwjobs.co.uk");
-                req.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate, br");
-                req.Headers.Add(HttpRequestHeader.AcceptLanguage, "es-ES,es;q=0.9");
-                req.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-                //req.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
-                //req.Headers.Add("upgrade-insecure-requests", "1");
 
-                req.CookieContainer = _cookieContainer;
-                return true;
-            };
+            _headersCollection = new WebHeaderCollection();
+            //_headersCollection.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36");
+            //_headersCollection.Add(HttpRequestHeader.Referer, "https://www.cwjobs.co.uk/");
+            //_headersCollection.Add(HttpRequestHeader.Host, "www.cwjobs.co.uk");
+            //_headersCollection.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate, br");
+            //_headersCollection.Add(HttpRequestHeader.AcceptLanguage, "es-ES,es;q=0.9");
+            //_headersCollection.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+
+
+
+
+
+
+
+            //_web_client.PreRequest = req =>
+            //{
+            //    req.Headers.Add( _headersCollection);
+            //    return true;
+            //};
         }
 
-        /// <summary>
-        ///  this Cookie assignment should be dynamic. 
-        /// </summary>
-        private void CreateCookieContainerWithCookie()
-        {
-            _cookieContainer = new CookieContainer();
-
-            // Expires in year 2051:
-            _cookie = new Cookie("AnonymousUser", "MemberId=932443cf-7daa-4d47-8a22-c3efc5ec70ba&IsAnonymous=True", "/", "www.cwjobs.co.uk");
-            _cookieContainer.Add(_cookie);
-
-        }
         public async Task<List<Job>> fetchDataCWJobs()
         {
-            
+            CookieContainer cookieContainer = null;
+            CookieCollection cookiesCollection = null;
+            WebHeaderCollection headersCollection = null;
             List<Job> jobsCWJobs = new List<Job>();
-
+            
+            // PostResponse :
+            _web_client.PostResponse = (req,res) =>
+            {
+                cookiesCollection = res.Cookies;
+                headersCollection = res.Headers;
+            };
+            // Initial call to get the cookies and headers:
+            _web_client.Load(_CWJobsLinks[0].DomainURL); 
+            cookieContainer = new CookieContainer();
+            cookieContainer.Add(cookiesCollection);
+            // PreRequest:
+            _web_client.PreRequest = req =>
+            {
+                req.CookieContainer = cookieContainer;
+                req.Headers = headersCollection;
+                return true;
+            };
             var url = _CWJobsLinks[0].createWebsiteLink();
-            var doc = _web_client.Load(url);
-
+            HtmlDocument doc = _web_client.Load(url);
             var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'job')]").Where(item => item.Id != "" && item.Id != null).ToList();
             
             foreach (var job in job_nodes)
@@ -121,17 +123,8 @@ namespace JobScaper.Scrapers
                 {
                     _web_client.PreRequest = req =>
                     {
-                        //req.Headers.Add(HttpRequestHeader.UserAgent, _web_client_userAgent);
                         req.Headers.Add(HttpRequestHeader.Referer, "https://www.cwjobs.co.uk/jobs/software-developer/in-wolverhampton?radius=0&Sort=2");
-                        //req.Timeout = 300000;
-                        //req.ReadWriteTimeout = 300000;
-
-                        //req.Headers.Add(HttpRequestHeader.AcceptLanguage, "es-ES,es;q=0.9");
-                        //req.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-                        //req.Headers.Add(HttpRequestHeader.CacheControl, "max-age=0");
-                        //req.Headers.Add("upgrade-insecure-requests", "1");
-
-                        req.CookieContainer = _cookieContainer;
+                        
                         return true;
                     };
                     var docWithJobFullDescription = _web_client.Load(jobFound.JobDescriptionLink);
