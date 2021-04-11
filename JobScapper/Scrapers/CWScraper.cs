@@ -1,5 +1,4 @@
 ﻿using HtmlAgilityPack;
-using JobScapper.Objects;
 using JobScraper.Scrapers;
 using Newtonsoft.Json;
 using System;
@@ -22,33 +21,10 @@ namespace JobScaper.Scrapers
     {
         private HtmlWeb _web_client;
         private LocationService _service;
-
-        private WebHeaderCollection _headersCollection= null;
         public CWScraper(LocationService service = null)
         {
             _service = service;
-
             _web_client = new HtmlWeb();
-
-            _headersCollection = new WebHeaderCollection();
-            //_headersCollection.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36");
-            //_headersCollection.Add(HttpRequestHeader.Referer, "https://www.cwjobs.co.uk/");
-            //_headersCollection.Add(HttpRequestHeader.Host, "www.cwjobs.co.uk");
-            //_headersCollection.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate, br");
-            //_headersCollection.Add(HttpRequestHeader.AcceptLanguage, "es-ES,es;q=0.9");
-            //_headersCollection.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-
-
-
-
-
-
-
-            //_web_client.PreRequest = req =>
-            //{
-            //    req.Headers.Add( _headersCollection);
-            //    return true;
-            //};
         }
 
         public async Task<List<Job>> fetchDataCWJobs()

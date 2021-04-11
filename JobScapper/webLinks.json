@@ -16,12 +16,12 @@
     "Sort": "2",
     "DomainURL": "https://www.cwjobs.co.uk"
   },
-  {
+  { // "http://www.reed.co.uk/jobs/software-developer-jobs-in-Birmingham?proximity=5&sortby=DisplayDate"
     "Platform": "Reed",
     "Searched": "software developer",
     "Location": "Birmingham",
     "Radius": "5",
-    //"Sort": "2",
+    //"Sort": "2", // Reed uses sortBy which is hardcoded in the ReedLink class.
     "DomainURL": "http://www.reed.co.uk"
   }
 ]

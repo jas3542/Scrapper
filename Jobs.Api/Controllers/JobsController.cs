@@ -105,10 +105,23 @@ namespace Jobs.Api.Controllers
                     filteredJobsList = _cacheJobsList.Where(item => {
                         for(int i= 0; i<include.Count(); i++)
                         {
-                            if (item.JobDetailedDescription.ToLower().Contains(include[i]) || item.Title.ToLower().Contains(include[i]) 
-                                    || item.Location.ToLower().Contains(include[i]))
-                                return true;
-                            break;
+                            bool found = false;
+                            if (item.JobDetailedDescription != null)
+                            {
+                                if (item.JobDetailedDescription.ToLower().Contains(include[i]))
+                                    found = true;
+                            }
+                            if (item.Title != null)
+                            {
+                                if (item.Title.ToLower().Contains(include[i]))
+                                    found = true;
+                            }
+                            if (item.Location != null)
+                            {
+                                if (item.Location.ToLower().Contains(include[i]))
+                                    found = true;
+                            }
+                            return found;
                         }
                         return false;
                     }).ToList();

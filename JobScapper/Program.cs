@@ -20,17 +20,17 @@ namespace JobScapper
             jobs = new List<Job>();
             LocationService service = new LocationService();
 
-            CWScraper CwJobsScraper = new CWScraper(service);
-            var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
-            jobs.AddRange(result_cwjobs);
+            //CWScraper CwJobsScraper = new CWScraper(service);
+            //var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
+            //jobs.AddRange(result_cwjobs);
 
             //IndeedScraper indeedScraper = new IndeedScraper();
             //var result_indeed = await indeedScraper.fetchDataIndeed();
             //jobs.AddRange(result_indeed);
 
-            //ReedScraper ReedScraper = new ReedScraper();
-            //var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
-            //jobs.AddRange(result_Reedjobs);
+            ReedScraper ReedScraper = new ReedScraper();
+            var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
+            jobs.AddRange(result_Reedjobs);
 
             if (jobs.Count() > 0)
             {
