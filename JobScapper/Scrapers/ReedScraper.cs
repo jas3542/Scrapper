@@ -16,7 +16,6 @@ using JobScraper;
 
 namespace JobScaper.Scrapers
 {
-    // TODO: Pagination is not added yet
     class ReedScraper : Scraper
     {
         private HtmlWeb _web_client;

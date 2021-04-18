@@ -54,7 +54,20 @@ namespace JobScaper.Scrapers
             var url = _CWJobsLinks[0].createWebsiteLink();
             HtmlDocument doc = _web_client.Load(url);
             var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'job')]").Where(item => item.Id != "" && item.Id != null).ToList();
-            
+
+            // Pagination if any:
+            var next_btn_href = this.getNextPageUrl(doc);
+            while (next_btn_href != "" && next_btn_href != null)
+            {
+                string nexyPage_url = _ReedLinks[0].DomainURL + "/" + next_btn_href;
+                var new_document = await _web_client.LoadFromWebAsync(nexyPage_url);
+                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//article[contains(@class, 'job-result')]").Where(item => item.Id != "" && item.Id != null).ToList();
+                job_nodes.AddRange(job_nodes_other_pages);
+
+                next_btn_href = this.getNextPageUrl(new_document);
+            }
+            // end Pagination
+
             foreach (var job in job_nodes)
             {
                 var jobFound = await buildCWJobsList(job, _CWJobsLinks[0].DomainURL);
@@ -62,6 +75,22 @@ namespace JobScaper.Scrapers
             }
 
             return jobsCWJobs;
+        }
+
+        /// <summary>
+        /// Extracts the url of the next page
+        /// </summary>
+        /// <param name="doc"> The html document which will contain the pagination list/bar</param>
+        /// <returns> The url of the next page </returns>
+        private string getNextPageUrl(HtmlDocument doc)
+        {
+            var nextPageNode = doc.DocumentNode.SelectNodes("//a[contains(@class,'next')]");
+            if (nextPageNode != null)
+            {
+                var nextUrl = nextPageNode[0].GetAttributeValue("href", ""); ; // Child nodes are the pagination pages (1,2,3).
+                return nextUrl;
+            }
+            return "";
         }
 
         private async Task<Job> buildCWJobsList(HtmlNode job, string domainUrl)

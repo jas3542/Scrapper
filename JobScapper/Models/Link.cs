@@ -13,7 +13,6 @@ namespace JobScapper.Objects
         public string Sort { get; set; }
         public string DomainURL { get; set; }
         public string FromAge { get; set; } // Used to get the result of "x" days only
-
         public virtual string createWebsiteLink()
         {
             return "";

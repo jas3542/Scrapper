@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace JobScaper.Scrapers
 {
+    // TODO add location service
     class IndeedScraper : Scraper
     {
         public IndeedScraper()
