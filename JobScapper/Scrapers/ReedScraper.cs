@@ -89,8 +89,6 @@ namespace JobScaper.Scrapers
                 jobFound.ScrappedCompanyName = "Reed";
                 string title = job.SelectSingleNode(".//h3[contains(@class,'title')]")?.InnerText;
                 jobFound.Title = HtmlEntity.DeEntitize(title);
-                //jobFound.Location = job.SelectSingleNode(".//li[contains(@class, 'location')]")?.InnerText;
-
                 var location = job.SelectSingleNode(".//li[contains(@class, 'location')]").InnerText;
                 jobFound.Location = location;
                 var l = _service.getlocationData(HtmlEntity.DeEntitize(location));
@@ -109,7 +107,6 @@ namespace JobScaper.Scrapers
                     }
 
                 }
-
 
 
                 jobFound.Company = job.SelectSingleNode(".//div[contains(@class, 'posted-by')]/a")?.InnerText;

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EtzO7Hn/usTb68NMQinIlQkR4AVS6i6FCAWX5kLHEERBLE5TjqxuyRqTDOxwpxL8+lpfHOqjZ6LjKdKgN/r7KQ==",
+  "dgSpecHash": "28d2vUbwCxXHJqn5aHNshJcyUDKaC9tRT1rcULRND4kyagEfmNw16+IC7LVsBVcrR3B+jqGfn9LVw48D+jqI6g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
   "expectedPackageFiles": [
@@ -44,7 +44,8 @@
     "C:\\Users\\Jas\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\system.text.encodings.web\\5.0.0\\system.text.encodings.web.5.0.0.nupkg.sha512",
-    "C:\\Users\\Jas\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512"
+    "C:\\Users\\Jas\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
   ],
   "logs": []
 }

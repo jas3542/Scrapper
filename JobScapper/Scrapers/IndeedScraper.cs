@@ -2,6 +2,7 @@
 using Jobs.Data.Objects;
 using JobScapper;
 using JobScapper.Objects;
+using JobScraper;
 using JobScraper.Scrapers;
 using Newtonsoft.Json;
 using System;
@@ -14,12 +15,12 @@ using System.Threading.Tasks;
 
 namespace JobScaper.Scrapers
 {
-    // TODO add location service
     class IndeedScraper : Scraper
     {
-        public IndeedScraper()
+        private LocationService _service;
+        public IndeedScraper(LocationService service = null)
         {
-
+            _service = service;
         }
 
         public async Task<List<Job>> fetchDataIndeed()
@@ -90,7 +91,27 @@ namespace JobScaper.Scrapers
                     jobFound.Title = HtmlEntity.DeEntitize(title);
                 }
                 if (job.SelectSingleNode(".//div[contains(@class, 'location')]") != null)
-                    jobFound.Location = job.SelectSingleNode(".//div[contains(@class, 'location')]").InnerText;
+                {
+                    var location = job.SelectSingleNode(".//div[contains(@class, 'location')]").InnerText;
+                    
+                    jobFound.Location = location;
+                    var l = _service.getlocationData(HtmlEntity.DeEntitize(location));
+
+                    if (l.Results != null)
+                    {
+                        var locationData = l.Results.FirstOrDefault().LocationData;
+                        jobFound.Borough = locationData.District_borough;
+                        if (locationData.Local_Type.ToLower() == "city")
+                        {
+                            jobFound.City = locationData.Name;
+                        }
+                        else
+                        {
+                            jobFound.City = locationData.Populated_place;
+                        }
+
+                    }
+                }
                 if (job.SelectSingleNode(".//span[contains(@class, 'company')]") != null)
                     jobFound.Company = job.SelectSingleNode(".//span[contains(@class, 'company')]").InnerText;
                 if (job.SelectSingleNode(".//span[contains(@class, 'salaryText')]") != null) { 
