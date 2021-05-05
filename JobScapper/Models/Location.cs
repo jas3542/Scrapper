@@ -48,10 +48,10 @@ namespace JobScraper.Models
         public string Type { get; set; }
         [JsonProperty(PropertyName = "LOCAL_TYPE")]
         public string Local_Type { get; set; }
-        //[JsonProperty(PropertyName = "GEOMETRY_X")]
-        //public long Geometry_x { get; set; }
-        //[JsonProperty(PropertyName = "GEOMETRY_Y")]
-        //public long Geometry_y { get; set; }
+        [JsonProperty(PropertyName = "GEOMETRY_X")]
+        public string Geometry_x { get; set; }
+        [JsonProperty(PropertyName = "GEOMETRY_Y")]
+        public string Geometry_y { get; set; }
         //[JsonProperty(PropertyName = "MOST_DETAIL_VIEW_RES")]
         //public long Most_detail_view_res { get; set; }
         //[JsonProperty(PropertyName = "LEAST_DETAIL_VIEW_RES")]

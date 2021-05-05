@@ -109,6 +109,8 @@ namespace JobScaper.Scrapers
                 {
                     var locationData = l.Results.FirstOrDefault().LocationData;
                     jobFound.Borough = locationData.District_borough;
+                    jobFound.Coordinate_X = locationData.Geometry_x;
+                    jobFound.Coordinate_Y = locationData.Geometry_y;
                     if (locationData.Local_Type.ToLower() == "city")
                     {
                         jobFound.City = locationData.Name;
