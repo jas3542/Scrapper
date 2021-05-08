@@ -177,7 +177,7 @@ namespace Jobs.Api.Controllers
         private async void GetJobs()
         {
             var listFound = _cache.TryGetValue("jobs_list", out _cacheJobsList);
-            if (!listFound)
+            if (!listFound || _cacheJobsList.Count == 0)
             {
                 using (var context = new DBScraperContext())
                 {
