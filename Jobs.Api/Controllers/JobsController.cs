@@ -150,6 +150,26 @@ namespace Jobs.Api.Controllers
             return Ok(filteredJobsList);
         }
 
+        [HttpGet]
+        [Route("getMapMarkersList")]
+        public async Task<ActionResult<List<JobMarker>>> GetMapMarkersList()
+        {
+            GetJobs();
+
+            var mapMarkersList = new List<JobMarker>();
+            await Task.Run(() =>
+            {
+                mapMarkersList = _cacheJobsList.Select(job =>
+                {
+                    JobMarker JobMarker = new JobMarker(job.Coordinate_X, job.Coordinate_Y, job.Title);
+                    return JobMarker;
+                }).ToList<JobMarker>();
+            });
+
+            return Ok(mapMarkersList);
+
+        }
+
         [HttpPost]
         public async void Post([FromBody] List<Job> jobs)
         {
@@ -189,4 +209,20 @@ namespace Jobs.Api.Controllers
             }
         }
     }
+
+    public class JobMarker {
+        
+        public JobMarker(string x, string y, string title)
+        {
+            X = x;
+            Y = y;
+            Title = title;
+        }
+
+        public string X { get; set; }
+        public string Y { get; set; }
+        public string Title { get; set; }
+
+    }
+
 }
