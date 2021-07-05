@@ -89,16 +89,19 @@ namespace JobScaper.Scrapers
                 jobFound.ScrappedCompanyName = "Reed";
                 string title = job.SelectSingleNode(".//h3[contains(@class,'title')]")?.InnerText;
                 jobFound.Title = HtmlEntity.DeEntitize(title);
-                var location = job.SelectSingleNode(".//li[contains(@class, 'location')]").InnerText;
+                var location = job.SelectSingleNode(".//li[contains(@class, 'location')]/text()").InnerText.Trim();
                 jobFound.Location = location;
                 var l = _service.getlocationData(HtmlEntity.DeEntitize(location));
 
                 if (l.Results != null)
                 {
                     var locationData = l.Results.FirstOrDefault().LocationData;
+                    var coordinates = _service.convertBNGToLat_Lon(locationData.Geometry_x, locationData.Geometry_y);
+
+                    jobFound.Coordinate_X = coordinates.LONGITUDE;
+                    jobFound.Coordinate_Y = coordinates.LATITUDE;
                     jobFound.Borough = locationData.District_borough;
-                    jobFound.Coordinate_X = locationData.Geometry_x;
-                    jobFound.Coordinate_Y = locationData.Geometry_y;
+                    
                     if (locationData.Local_Type.ToLower() == "city")
                     {
                         jobFound.City = locationData.Name;
