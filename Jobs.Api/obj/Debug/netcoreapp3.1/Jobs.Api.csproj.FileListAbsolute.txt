@@ -53,7 +53,6 @@ C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcor
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Jobs.Data.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Jobs.Data.pdb
-C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.csprojAssemblyReference.cache
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.AssemblyInfoInputs.cache
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.AssemblyInfo.cs
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.csproj.CoreCompileInputs.cache
@@ -66,3 +65,4 @@ C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcor
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.pdb
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.genruntimeconfig.cache
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.csproj.AssemblyReference.cache

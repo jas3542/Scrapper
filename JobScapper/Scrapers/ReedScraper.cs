@@ -117,11 +117,12 @@ namespace JobScaper.Scrapers
                 jobFound.Company = job.SelectSingleNode(".//div[contains(@class, 'posted-by')]/a")?.InnerText;
                 string salary = job.SelectSingleNode(".//li[contains(@class, 'salary')]")?.InnerText;
                 jobFound.Salary = HtmlEntity.DeEntitize(salary);
-                jobFound.JobDescriptionLink = job.SelectSingleNode(".//a[contains(@class,'job-block-link')]")?.GetAttributeValue("href", "");
+                var descriptionLink = job.SelectSingleNode(".//a[contains(@class,'job-block-link')]")?.GetAttributeValue("href", "");
+                jobFound.JobDescriptionLink = domainUrl + "/" + descriptionLink;
 
                 if (jobFound.JobDescriptionLink != "")
                 {
-                    var docWithJobFullDescription = _web_client.Load(domainUrl +"/" +jobFound.JobDescriptionLink);
+                    var docWithJobFullDescription = _web_client.Load(jobFound.JobDescriptionLink);
 
                     string description = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[(@class= 'description')]")?.InnerHtml;
                     jobFound.JobDetailedDescription = HtmlEntity.DeEntitize(description);

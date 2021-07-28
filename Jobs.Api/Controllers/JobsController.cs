@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Text.RegularExpressions;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace Jobs.Api.Controllers
 {
@@ -138,9 +139,27 @@ namespace Jobs.Api.Controllers
                     filteredJobsList = filteredJobsList.Where(item => {
                         for (int i = 0; i < exclude.Count(); i++)
                         {
-                            if (item.JobDetailedDescription.ToLower().Contains(exclude[i]) || item.Title.ToLower().Contains(exclude[i])
-                                    || item.Location.ToLower().Contains(exclude[i]))
-                                return false;
+                            if (item.JobDetailedDescription != null) {
+                                if (item.JobDetailedDescription.ToLower().Contains(exclude[i]))
+                                {
+                                    return false;
+                                }
+                            }
+                            if (item.Title != null) {
+                                if (item.Title.ToLower().Contains(exclude[i]))
+                                {
+                                    return false;
+                                }
+                            }
+                            if (item.Location != null) {
+                                if (item.Location.ToLower().Contains(exclude[i]))
+                                {
+                                    return false;
+                                }
+                            }
+                            //if (item.JobDetailedDescription.ToLower().Contains(exclude[i]) || item.Title.ToLower().Contains(exclude[i])
+                            //        || item.Location.ToLower().Contains(exclude[i]))
+                            //    return false;
                         }
                         return true;
                     }).ToList();
@@ -152,22 +171,31 @@ namespace Jobs.Api.Controllers
 
         [HttpGet]
         [Route("getMapMarkersList")]
-        public async Task<ActionResult<List<JobMarker>>> GetMapMarkersList()
+        public async Task<ActionResult<string>> GetMapMarkersList()
         {
             GetJobs();
-
-            var mapMarkersList = new List<JobMarker>();
+            
+            Dictionary<Tuple<string,string>, List<Job>> listByMarkersLocation = new Dictionary<Tuple<string,string>, List<Job>>();            
+            
             await Task.Run(() =>
             {
-                mapMarkersList = _cacheJobsList.Select(job =>
+                _cacheJobsList.ForEach(job =>
                 {
-                    JobMarker JobMarker = new JobMarker(job.Coordinate_X, job.Coordinate_Y, job.Title);
-                    return JobMarker;
-                }).ToList<JobMarker>();
+                    var key = new Tuple<string,string>(job.Coordinate_X, job.Coordinate_Y );
+                    if (!listByMarkersLocation.ContainsKey(key))
+                    {
+
+                        listByMarkersLocation.Add(key, new List<Job> { job });
+                    }
+                    else
+                    {
+                        listByMarkersLocation[key].Add(job);
+                    }
+
+                });
             });
 
-            return Ok(mapMarkersList);
-
+            return Ok(JsonConvert.SerializeObject(listByMarkersLocation));
         }
 
         [HttpPost]
@@ -210,6 +238,16 @@ namespace Jobs.Api.Controllers
         }
     }
 
+    public class LongitudLatitude
+    {
+        public string Longitud { get; set; }
+        public string Latitude { get; set; }
+        public LongitudLatitude(string Lon, string lat)
+        {
+            Longitud = Lon;
+            Latitude = lat;
+        }
+    }
     public class JobMarker {
         
         public JobMarker(string x, string y, string title)
@@ -218,7 +256,7 @@ namespace Jobs.Api.Controllers
             Y = y;
             Title = title;
         }
-
+        public string TotalJobsOnLocation { get; set; }
         public string X { get; set; }
         public string Y { get; set; }
         public string Title { get; set; }
