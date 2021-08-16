@@ -1,7 +1,7 @@
 [
   {
     "Platform": "Indeed",
-    "Searched": "software developer AND NOT senior AND NOT lead AND NOT noir", // AND NOT is used to exclude certain words
+    "Searched": "software developer AND NOT senior AND NOT lead AND NOT noir AND NOT trainee", // AND NOT is used to exclude certain words
     "Location": "Birmingham",
     "Radius": "5", // extact location is 0 and 5 miles will be 5
     "Sort": "date",
@@ -10,7 +10,7 @@
   },
   {
     "Platform": "CWJobs",
-    "Searched": "software developer AND NOT senior AND NOT lead AND NOT noir", // AND NOT is used to exclude certain words
+    "Searched": "software developer AND NOT senior AND NOT lead AND NOT noir AND NOT trainee", // AND NOT is used to exclude certain words
     "Location": "Birmingham",
     "Radius": "5",
     "Sort": "2",
@@ -18,7 +18,7 @@
   },
   { // "http://www.reed.co.uk/jobs/software-developer-jobs-in-Birmingham?proximity=5&sortby=DisplayDate"
     "Platform": "Reed",
-    "Searched": "software developer AND NOT senior AND NOT lead AND NOT noir", // AND NOT is used to exclude certain words
+    "Searched": "software developer AND NOT senior AND NOT lead AND NOT noir AND NOT trainee", // AND NOT is used to exclude certain words
     "Location": "Birmingham",
     "Radius": "5",
     //"Sort": "2", // Reed uses sortBy which is hardcoded in the ReedLink class.

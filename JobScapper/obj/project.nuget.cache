@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZkJ5BzcLOGpJD+yS+I5qSaWnRhkoTDbwBD54tFQqR0f/u1KM3JuHWVtl47cVC9/ljppqAgEcgwfbW8E5fsyx6w==",
+  "dgSpecHash": "pM1YHAaKWM69Kcw3SHnwBzI2eeH1PXmd1O4Jtt6dGTsDvCh0rTO5VEzW7NhpKcH4SVwQMWBPlyCmbzOQu97yDg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\JobScraper.csproj",
+  "projectFilePath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScraper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jas\\.nuget\\packages\\htmlagilitypack\\1.11.28\\htmlagilitypack.1.11.28.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",

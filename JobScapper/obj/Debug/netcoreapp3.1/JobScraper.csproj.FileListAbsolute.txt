@@ -1,6 +1,5 @@
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\JobScraper.exe
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\appSettings.json
-C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\SqLite_DB\JobScraper_DB.db
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\webLinks.json
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\JobScraper.deps.json
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\JobScraper.runtimeconfig.json
@@ -128,3 +127,14 @@ C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netc
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.pdb
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.genruntimeconfig.cache
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.deps.json
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.runtimeconfig.json
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.runtimeconfig.dev.json
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.exe
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.dll
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Data.dll
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.pdb
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Data.pdb
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.csproj.AssemblyReference.cache
+C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.GeneratedMSBuildEditorConfig.editorconfig

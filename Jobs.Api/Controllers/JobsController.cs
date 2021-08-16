@@ -21,7 +21,8 @@ namespace Jobs.Api.Controllers
     {
         private readonly ILogger<JobsController> _logger;
         private List<Job> _cacheJobsList;
-        private readonly IMemoryCache _cache; // used to cached list of jobs
+        private DateTime _timeOfUpdate;
+        private readonly IMemoryCache _cache; // used to cached list of jobs in memory
 
         public JobsController(ILogger<JobsController> logger, IMemoryCache cache)
         {
@@ -30,6 +31,10 @@ namespace Jobs.Api.Controllers
             _cache = cache;
         }
 
+        /// <summary>
+        /// Get's the list of jobs from cache if any or DB.
+        /// </summary>
+        /// <returns> list of jobs</returns>
         [HttpGet]
         public async Task<ActionResult<List<Job>>> Get()
         {
@@ -38,6 +43,11 @@ namespace Jobs.Api.Controllers
             return Ok(_cacheJobsList);
         }
 
+        /// <summary>
+        /// Get's a ordered list of jobs.
+        /// </summary>
+        /// <param name="sortBy">list sort by (salary, distance,date)</param>
+        /// <returns>return a ordered list of jobs</returns>
         [HttpGet]
         [Route("getOrderedList")]
         public async Task<ActionResult<List<Job>>> GetOrderedList([FromQuery]string sortBy)
@@ -70,6 +80,11 @@ namespace Jobs.Api.Controllers
             
         }
 
+        /// <summary>
+        /// Get's a list of filteredList jobs (E.G. get a list excluding the word "senior", including the jobs with the word "junior",etc ).
+        /// </summary>
+        /// <param name="filterBy"></param>
+        /// <returns>Returns a list of filetred jobs</returns>
         [HttpGet]
         [Route("getFilteredList")]
         public async Task<ActionResult<List<Job>>> GetFilteredList([FromQuery] string filterBy)
@@ -157,9 +172,6 @@ namespace Jobs.Api.Controllers
                                     return false;
                                 }
                             }
-                            //if (item.JobDetailedDescription.ToLower().Contains(exclude[i]) || item.Title.ToLower().Contains(exclude[i])
-                            //        || item.Location.ToLower().Contains(exclude[i]))
-                            //    return false;
                         }
                         return true;
                     }).ToList();
@@ -169,6 +181,10 @@ namespace Jobs.Api.Controllers
             return Ok(filteredJobsList);
         }
 
+        /// <summary>
+        /// Get's a list of jobs and there marker positions (lat,lng) for the map.
+        /// </summary>
+        /// <returns>A dictionary with lat,lng as key and a list of jobs as value</returns>
         [HttpGet]
         [Route("getMapMarkersList")]
         public async Task<ActionResult<string>> GetMapMarkersList()
@@ -198,6 +214,10 @@ namespace Jobs.Api.Controllers
             return Ok(JsonConvert.SerializeObject(listByMarkersLocation));
         }
 
+        /// <summary>
+        /// Saves a list of jobs.
+        /// </summary>
+        /// <param name="jobs">List of jobs to be Saved</param>
         [HttpPost]
         public async void Post([FromBody] List<Job> jobs)
         {
@@ -222,45 +242,45 @@ namespace Jobs.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Checks if jobs are in cache, if not it will fetch the list from DB.
+        /// </summary>
         private async void GetJobs()
         {
-            var listFound = _cache.TryGetValue("jobs_list", out _cacheJobsList);
-            if (!listFound || _cacheJobsList.Count == 0)
+            DateTime updatedTimeFromDB;
+            using (var context = new DBScraperContext())
             {
+                var dateTime = await context.updatedTime.FirstOrDefaultAsync();
+                updatedTimeFromDB = Convert.ToDateTime(dateTime.Time);
+            }
+
+            var time = _cache.TryGetValue("time_of_update", out _timeOfUpdate);
+
+            if (!time || _timeOfUpdate != updatedTimeFromDB) {
+
                 using (var context = new DBScraperContext())
                 {
                     _cacheJobsList = await context.Jobs.ToListAsync();
                     _cache.CreateEntry("jobs_list");
                     _cache.Set("jobs_list", _cacheJobsList);
+
+                    _cache.CreateEntry("time_of_update");
+                        _cache.Set("time_of_update", _timeOfUpdate);
                 }
-                
+
             }
+            //var listFound = _cache.TryGetValue("jobs_list", out _cacheJobsList);
+            //if (!listFound || _cacheJobsList.Count == 0)
+            //{
+            //    using (var context = new DBScraperContext())
+            //    {
+            //        _cacheJobsList = await context.Jobs.ToListAsync();
+            //        _cache.CreateEntry("jobs_list");
+            //        _cache.Set("jobs_list", _cacheJobsList);
+            //    }
+                
+            //}
         }
-    }
-
-    public class LongitudLatitude
-    {
-        public string Longitud { get; set; }
-        public string Latitude { get; set; }
-        public LongitudLatitude(string Lon, string lat)
-        {
-            Longitud = Lon;
-            Latitude = lat;
-        }
-    }
-    public class JobMarker {
-        
-        public JobMarker(string x, string y, string title)
-        {
-            X = x;
-            Y = y;
-            Title = title;
-        }
-        public string TotalJobsOnLocation { get; set; }
-        public string X { get; set; }
-        public string Y { get; set; }
-        public string Title { get; set; }
-
     }
 
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dztxpS1kn2WV32vg5Pm6lvqunZKmWxbE4yzN+1IsDcRKfV1fIkU6nL4yPxIpQp/FvpeE9uBDr6PADerJ7XxAhQ==",
+  "dgSpecHash": "zKtNdCCXAZeJmSa5JMPLeTX42ectg43S26zLEn2Qq/VvWbVM9GatR3lp92tz1lSf4xETt2rOHn9i4T6MHLNhgg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
+  "projectFilePath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jas\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
