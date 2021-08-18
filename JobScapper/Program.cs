@@ -24,13 +24,13 @@ namespace JobScapper
             //var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
             //jobs.AddRange(result_cwjobs);
 
-            //IndeedScraper indeedScraper = new IndeedScraper(service);
-            //var result_indeed = await indeedScraper.fetchDataIndeed();
-            //jobs.AddRange(result_indeed);
+            IndeedScraper indeedScraper = new IndeedScraper(service);
+            var result_indeed = await indeedScraper.fetchDataIndeed();
+            jobs.AddRange(result_indeed);
 
-            ReedScraper ReedScraper = new ReedScraper(service);
-            var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
-            jobs.AddRange(result_Reedjobs);
+            //ReedScraper ReedScraper = new ReedScraper(service);
+            //var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
+            //jobs.AddRange(result_Reedjobs);
 
             if (jobs.Count() > 0)
             {

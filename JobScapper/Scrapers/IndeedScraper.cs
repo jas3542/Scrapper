@@ -31,7 +31,7 @@ namespace JobScaper.Scrapers
 
             HtmlWeb web_client = new HtmlWeb();
             var doc = await web_client.LoadFromWebAsync(indeed_url);
-            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'row')]")?.ToList();
+            var job_nodes = doc.DocumentNode.SelectNodes("//a[contains(@class, 'result')]")?.ToList();
 
             // Pagination if any:
             var next_btn_href = this.getNextPageUrl(doc);
@@ -39,7 +39,7 @@ namespace JobScaper.Scrapers
             {
                 string nexyPage_url = _IndeedLinks[0].DomainURL + "/" + next_btn_href;
                 var new_document = await web_client.LoadFromWebAsync(nexyPage_url);
-                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//div[contains(@class, 'row')]");
+                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//a[contains(@class, 'result')]");
                 job_nodes.AddRange(job_nodes_other_pages);
 
                 next_btn_href = this.getNextPageUrl(new_document);
@@ -86,13 +86,13 @@ namespace JobScaper.Scrapers
                 HtmlWeb web_client = new HtmlWeb();
 
                 jobFound.ScrappedCompanyName = "Indeed";
-                if (job.SelectSingleNode("h2[contains(@class, 'title')]") != null) {
-                    string title = job.SelectSingleNode("h2[contains(@class, 'title')]").InnerText;
+                if (job.SelectSingleNode(".//h2[contains(@class, 'jobTitle')]/span") != null) {
+                    string title = job.SelectSingleNode(".//h2[contains(@class, 'jobTitle')]/span").InnerText;
                     jobFound.Title = HtmlEntity.DeEntitize(title);
                 }
-                if (job.SelectSingleNode(".//div[contains(@class, 'location')]") != null)
+                if (job.SelectSingleNode(".//div[contains(@class, 'companyLocation')]") != null)
                 {
-                    var location = job.SelectSingleNode(".//div[contains(@class, 'location')]").InnerText;
+                    var location = job.SelectSingleNode(".//div[contains(@class, 'companyLocation')]").InnerText;
                     
                     jobFound.Location = location;
                     var l = _service.getlocationData(HtmlEntity.DeEntitize(location));
@@ -117,18 +117,19 @@ namespace JobScaper.Scrapers
 
                     }
                 }
-                if (job.SelectSingleNode(".//span[contains(@class, 'company')]") != null)
-                    jobFound.Company = job.SelectSingleNode(".//span[contains(@class, 'company')]").InnerText;
-                if (job.SelectSingleNode(".//span[contains(@class, 'salaryText')]") != null) { 
-                    string salary = job.SelectSingleNode(".//span[contains(@class, 'salaryText')]").InnerText;
+                if (job.SelectSingleNode(".//span[contains(@class, 'companyName')]") != null)
+                    jobFound.Company = job.SelectSingleNode(".//span[contains(@class, 'companyName')]").InnerText;
+                if (job.SelectSingleNode(".//span[contains(@class, 'salary-snippet')]") != null) { 
+                    string salary = job.SelectSingleNode(".//span[contains(@class, 'salary-snippet')]").InnerText;
                     jobFound.Salary = HtmlEntity.DeEntitize(salary);
                 }
-                if (job.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]") != null) { 
-                    var descriptionLink = job.SelectSingleNode(".//a[contains(@class, 'turnstileLink')]").GetAttributeValue("href", "");
-                    jobFound.JobDescriptionLink = domainUrl + jobFound.JobDescriptionLink;
+                var job_link = job.GetAttributeValue("href", "");
+                if (job_link != "")
+                {
+                    jobFound.JobDescriptionLink = domainUrl + job_link.Replace("rc/clk","viewjob");
                 }
 
-                if (jobFound.JobDescriptionLink != "")
+                if (jobFound.JobDescriptionLink != "" && jobFound.JobDescriptionLink != null)
                 {
                     HtmlWeb web_client2 = new HtmlWeb();
                     var docWithJobFullDescription = web_client.Load(jobFound.JobDescriptionLink);
