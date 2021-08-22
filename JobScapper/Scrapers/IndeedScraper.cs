@@ -123,11 +123,11 @@ namespace JobScaper.Scrapers
                     string salary = job.SelectSingleNode(".//span[contains(@class, 'salary-snippet')]").InnerText;
                     jobFound.Salary = HtmlEntity.DeEntitize(salary);
                 }
-                var job_link = job.GetAttributeValue("href", "");
-                if (job_link != "")
-                {
-                    jobFound.JobDescriptionLink = domainUrl + job_link.Replace("rc/clk","viewjob");
-                }
+                jobFound.JobDescriptionLink = domainUrl + HtmlEntity.DeEntitize(job.GetAttributeValue("href", ""));
+                //if (job_link != "")
+                //{
+                //    jobFound.JobDescriptionLink = domainUrl + job_link.Replace("rc/clk","viewjob");
+                //}
 
                 if (jobFound.JobDescriptionLink != "" && jobFound.JobDescriptionLink != null)
                 {
@@ -135,7 +135,7 @@ namespace JobScaper.Scrapers
                     var docWithJobFullDescription = web_client.Load(jobFound.JobDescriptionLink);
                     //if (docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]") != null)
                     
-                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode("//div[contains(@class, 'jobsearch-jobDescriptionText')]")?.InnerHtml;
+                    string description = docWithJobFullDescription.DocumentNode.SelectSingleNode(".//div[contains(@class, 'jobsearch-jobDescriptionText')]")?.InnerHtml;
                     jobFound.JobDetailedDescription = HtmlEntity.DeEntitize(description);
                 }
             });
