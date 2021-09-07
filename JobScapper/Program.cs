@@ -19,18 +19,14 @@ namespace JobScapper
         {
             jobs = new List<Job>();
             LocationService service = new LocationService();
-            /*** 
-             * CWJobs Scraper is not working for now.
-             * 
-                CWScraper CwJobsScraper = new CWScraper(service);
-                var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
-                jobs.AddRange(result_cwjobs);
             
-            ***/
+            CWScraper CwJobsScraper = new CWScraper(service);
+            var result_cwjobs = await CwJobsScraper.fetchDataCWJobs();
+            jobs.AddRange(result_cwjobs);
 
-            IndeedScraper indeedScraper = new IndeedScraper(service);
-            var result_indeed = await indeedScraper.fetchDataIndeed();
-            jobs.AddRange(result_indeed);
+            //IndeedScraper indeedScraper = new IndeedScraper(service);
+            //var result_indeed = await indeedScraper.fetchDataIndeed();
+            //jobs.AddRange(result_indeed);
 
             //ReedScraper ReedScraper = new ReedScraper(service);
             //var result_Reedjobs = await ReedScraper.fetchDataCWJobs();
@@ -46,7 +42,6 @@ namespace JobScapper
             }
 
             // Console.ReadLine();
-
 
         }
     }
