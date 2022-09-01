@@ -35,6 +35,12 @@ namespace JobScaper.Scrapers
             List<Job> jobsCWJobs = new List<Job>();
             var url = _CWJobsLinks[0].createWebsiteLink();
 
+            _web_client.PreRequest = req =>
+            {
+                req.CookieContainer = cookieContainer;
+                req.Headers = headersCollection;
+                return true;
+            };
             // PostResponse :
             _web_client.PostResponse = (req,res) =>
             {
@@ -42,31 +48,22 @@ namespace JobScaper.Scrapers
                 headersCollection = res.Headers;
             };
             // Initial call to get the cookies and headers:
-            _web_client.Load(_CWJobsLinks[0].DomainURL); 
-
-            // Cookies hardCoded to pass the initial Loading spinner:
-            Cookie cookie = new Cookie("_abck", "65E9E920825499F06007E802D90FA206~0~YAAQp/pxaJhaFn57AQAAswoIvQaMgwDLAJVnuhzENzF7g6A+J8apCQi1nKDyQG53X/UtzoannfmFH3y+q7ZH/RW2j669z2fHxbfD8c7tEMguNjrO8j+T1Ob/qW0vwct5TePrnkkqNLxbAqgBnuVT/8aFoK/qKFJ8KmFA/Z9QXUSfzFs8S5RR/LWxyXfUjau6pXd6jW7LeFlTNoPc0qA/y0DxOjz3e6TqDnI7nLLRq3O5oNr7KsN+TsqV5aI6Y4aYi1Lz2RBEc0Jgz3AGUismDhAe2IsOTLakb4Hu5P/cYEtnZSEr9iCuugJcO8blMElLGslIOzifKNnhytIUDtZzgbpg5PY8o4EZI9DTbRpNopF+MdRgQ0027eHi1H9iEgrFOfSPUrwZ8eKLJsA5fO1XJODGmPH0prWEueM=~-1~-1~-1","/", "www.cwjobs.co.uk");
-            cookiesCollection.Add(cookie); // expire in 2022
-            cookie = new Cookie("PJBJOBSEEKER", "1","/","www.cwjobs.co.uk");
-            cookiesCollection.Add(cookie); // expire in 2022
-            cookie = new Cookie("INEU", "1", "/", "www.cwjobs.co.uk");
-            cookiesCollection.Add(cookie); // expire in 2022
-            cookie = new Cookie("sc_vid", "bcfd91ddbfd4e8b9d3582b11344a7dc9", "/", "www.cwjobs.co.uk");
-            cookiesCollection.Add(cookie); // expire in 2022
+            _web_client.Load("https://www.cwjobs.co.uk"); 
 
             cookieContainer.Add(cookiesCollection);
 
-            
             // PreRequest:
             _web_client.PreRequest = req =>
             {
                 req.CookieContainer = cookieContainer;
                 req.Headers = headersCollection;
+                req.Headers.Add("Referer", "https://www.cwjobs.co.uk/");
                 return true;
             };
+
             HtmlDocument doc = _web_client.Load(url);
 
-            var job_nodes = doc.DocumentNode.SelectNodes("//div[contains(@class, 'job')]").Where(item => item.Id != "" && item.Id != null).ToList();
+            var job_nodes = doc.DocumentNode.SelectNodes("//article[contains(@id, 'job-')]").Where(item => item.Id != "" && item.Id != null).ToList();
 
             // Pagination if any:
             var next_btn_href = this.getNextPageUrl(doc);
@@ -74,7 +71,7 @@ namespace JobScaper.Scrapers
             {
                 string nexyPage_url = _ReedLinks[0].DomainURL + "/" + next_btn_href;
                 var new_document = await _web_client.LoadFromWebAsync(nexyPage_url);
-                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//article[contains(@class, 'job-result')]").Where(item => item.Id != "" && item.Id != null).ToList();
+                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//article[contains(@id, 'job-item')]").Where(item => item.Id != "" && item.Id != null).ToList();
                 job_nodes.AddRange(job_nodes_other_pages);
 
                 next_btn_href = this.getNextPageUrl(new_document);

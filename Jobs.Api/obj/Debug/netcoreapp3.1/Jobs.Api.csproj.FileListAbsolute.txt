@@ -135,3 +135,4 @@ C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.genruntimeconfig.cache
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.csproj.AssemblyReference.cache
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.GeneratedMSBuildEditorConfig.editorconfig

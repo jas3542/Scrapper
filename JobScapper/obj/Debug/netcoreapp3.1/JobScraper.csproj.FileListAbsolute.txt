@@ -119,11 +119,9 @@ C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\bin\Debug\netc
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Data.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.pdb
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Data.pdb
-C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.csprojAssemblyReference.cache
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.AssemblyInfoInputs.cache
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.AssemblyInfo.cs
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.csproj.CoreCompileInputs.cache
-C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.csproj.CopyComplete
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.dll
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.pdb
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.genruntimeconfig.cache
@@ -138,3 +136,8 @@ C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.A
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Data.pdb
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.csproj.AssemblyReference.cache
 C:\Users\Jas\Documents\GitHub\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.deps.json
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.runtimeconfig.json
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\bin\Debug\netcoreapp3.1\Jobs.Api.runtimeconfig.dev.json
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.csproj.AssemblyReference.cache
+C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\JobScapper\obj\Debug\netcoreapp3.1\JobScraper.GeneratedMSBuildEditorConfig.editorconfig

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScraper.csproj": {}
+    "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\JobScraper.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\Jobs.Api.csproj": {
+    "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
+        "projectUniqueName": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
         "projectName": "Jobs.Api",
-        "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
+        "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
         "packagesPath": "C:\\Users\\Jas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\obj\\",
+        "outputPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj": {
-                "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj"
+              "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj": {
+                "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj"
               }
             }
           }
@@ -75,6 +75,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.25, 3.1.25]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -83,18 +89,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj": {
+    "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
         "projectName": "Jobs.Data",
-        "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
+        "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
         "packagesPath": "C:\\Users\\Jas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\obj\\",
+        "outputPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -151,18 +157,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScraper.csproj": {
+    "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\JobScraper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScraper.csproj",
+        "projectUniqueName": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\JobScraper.csproj",
         "projectName": "JobScraper",
-        "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\JobScraper.csproj",
+        "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\JobScraper.csproj",
         "packagesPath": "C:\\Users\\Jas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\JobScapper\\obj\\",
+        "outputPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\JobScapper\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -179,11 +185,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\Jobs.Api.csproj": {
-                "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\Jobs.Api.csproj"
+              "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj": {
+                "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj"
               },
-              "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj": {
-                "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj"
+              "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj": {
+                "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj"
               }
             }
           }
@@ -225,12 +231,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.25, 3.1.25]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }
