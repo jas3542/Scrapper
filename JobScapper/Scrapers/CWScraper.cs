@@ -109,9 +109,9 @@ namespace JobScaper.Scrapers
             await Task.Run(() =>
             {
                 jobFound.ScrappedCompanyName = "CwJobs";
-                string title = job.SelectSingleNode(".//div[contains(@class,'job-title')]/a").InnerText;
+                string title = job.SelectSingleNode("//a[@data-at='job-item-title']/h2").InnerText;
                 jobFound.Title = HtmlEntity.DeEntitize(title);
-                var location = job.SelectSingleNode(".//li[contains(@class, 'location')]/span").InnerText;
+                var location = job.SelectSingleNode("//li[@data-at='job-item-location']").InnerText;
                 jobFound.Location = location;
                 var l = _service.getlocationData(HtmlEntity.DeEntitize(location.Split(",")[0]));
                 

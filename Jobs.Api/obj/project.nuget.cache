@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "X++QkSVEo1xazC0/8sUSNrtrBOsDLiRJ+y7jVAHKa1CeKDo9SSXkGPpiNHgmN3eyeuQHHWkFeMMcxfoTjkRjzg==",
+  "dgSpecHash": "jha+1LE/9q646SVFuVOLEjfXQU4RVHuh2loWpN0q/s3uqfn8Gcs/koZwmiPFZF3oN6zjxKE1GfKhiGLzGHaTfA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
+  "projectFilePath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Api\\Jobs.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jas\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
@@ -44,8 +44,7 @@
     "C:\\Users\\Jas\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\system.text.encodings.web\\5.0.0\\system.text.encodings.web.5.0.0.nupkg.sha512",
-    "C:\\Users\\Jas\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512",
-    "C:\\Users\\Jas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.25\\microsoft.netcore.app.host.win-x64.3.1.25.nupkg.sha512"
+    "C:\\Users\\Jas\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

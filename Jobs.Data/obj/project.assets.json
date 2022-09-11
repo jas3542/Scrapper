@@ -1217,11 +1217,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
       "projectName": "Jobs.Data",
-      "projectPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
+      "projectPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
       "packagesPath": "C:\\Users\\Jas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\obj\\",
+      "outputPath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1236,7 +1236,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -1248,7 +1247,6 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Sqlite": {
             "target": "Package",
@@ -1278,7 +1276,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
