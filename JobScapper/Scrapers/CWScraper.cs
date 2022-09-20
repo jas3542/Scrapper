@@ -71,7 +71,7 @@ namespace JobScaper.Scrapers
             {
                 string nexyPage_url = _ReedLinks[0].DomainURL + "/" + next_btn_href;
                 var new_document = await _web_client.LoadFromWebAsync(nexyPage_url);
-                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//article[contains(@id, 'job-item')]").Where(item => item.Id != "" && item.Id != null).ToList();
+                var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//article[contains(@id, 'job-')]").Where(item => item.Id != "" && item.Id != null).ToList();
                 job_nodes.AddRange(job_nodes_other_pages);
 
                 next_btn_href = this.getNextPageUrl(new_document);
@@ -94,7 +94,7 @@ namespace JobScaper.Scrapers
         /// <returns> The url of the next page </returns>
         private string getNextPageUrl(HtmlDocument doc)
         {
-            var nextPageNode = doc.DocumentNode.SelectNodes("//a[contains(@class,'next')]");
+            var nextPageNode = doc.DocumentNode.SelectNodes("//a[contains(@aria-label,'Next')]");
             if (nextPageNode != null)
             {
                 var nextUrl = nextPageNode[0].GetAttributeValue("href", ""); ; // Child nodes are the pagination pages (1,2,3).
