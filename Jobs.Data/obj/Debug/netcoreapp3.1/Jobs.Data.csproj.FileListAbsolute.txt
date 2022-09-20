@@ -15,6 +15,5 @@ C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Da
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.csproj.CoreCompileInputs.cache
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.dll
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.pdb
-C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.csproj.AssemblyReference.cache
-C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Data\obj\Debug\netcoreapp3.1\Jobs.Data.csprojAssemblyReference.cache

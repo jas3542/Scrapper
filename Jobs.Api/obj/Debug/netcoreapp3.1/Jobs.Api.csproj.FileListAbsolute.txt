@@ -127,12 +127,11 @@ C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\staticwebassets\Jobs.Api.StaticWebAssets.Manifest.cache
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\staticwebassets\Jobs.Api.StaticWebAssets.xml
-C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\Jobs.Api.styles.css
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.RazorTargetAssemblyInfo.cache
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.csproj.CopyComplete
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.dll
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.pdb
 C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.genruntimeconfig.cache
-C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.csproj.AssemblyReference.cache
-C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Jas\Documents\_visualStudio_projects\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\Jas\Documents\GitHub\Scrapper\Jobs.Api\obj\Debug\netcoreapp3.1\Jobs.Api.csprojAssemblyReference.cache
