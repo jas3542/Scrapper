@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oitAnttfkzPNj/3HG8gB1MT91+o/1nKWzNcZbrnCm9dzhws6DSDcMyao5paRbhUDpMCuUBrMNRmX25BNF31ZJA==",
+  "dgSpecHash": "J85IrnWpyHIsU3JYS73VCkJcTz/J9r6jI5DUPTHzVZdjYCZRhJJb89Z606ZYcERl+zP7insqfPzRmbq9p/0XOw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jas\\Documents\\GitHub\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
+  "projectFilePath": "C:\\Users\\Jas\\Documents\\_visualStudio_projects\\Scrapper\\Jobs.Data\\Jobs.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jas\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.2\\microsoft.data.sqlite.core.5.0.2.nupkg.sha512",
     "C:\\Users\\Jas\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",

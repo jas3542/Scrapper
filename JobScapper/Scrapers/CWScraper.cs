@@ -61,18 +61,65 @@ namespace JobScaper.Scrapers
                 return true;
             };
 
+            // PostResponse :
+            _web_client.PostResponse = (req, res) =>
+            {
+                cookiesCollection = res.Cookies;
+                headersCollection = res.Headers;
+            };
+
             HtmlDocument doc = _web_client.Load(url);
+
+            cookieContainer = new CookieContainer();
+            // expires on 2023-12-07T15:54:32.177Z: 
+            cookiesCollection.Add(new Cookie("AnonymousUser", "MemberId=d73eb77d-b155-43ab-bcba-4e8e35ed28b6&IsAnonymous=True", "/", "www.cwjobs.co.uk"));
+            cookieContainer.Add(cookiesCollection);
 
             var job_nodes = doc.DocumentNode.SelectNodes("//article[contains(@id, 'job-')]").Where(item => item.Id != "" && item.Id != null).ToList();
 
             // Pagination if any:
             var next_btn_href = this.getNextPageUrl(doc);
+
+            // PreRequest:
+            _web_client.PreRequest = req =>
+            {
+                req.CookieContainer = cookieContainer;
+                req.Headers = headersCollection;
+                req.Headers.Remove("Referer");
+                req.Headers.Add("Referer", url);
+                return true;
+            };
+
+            // PostResponse :
+            _web_client.PostResponse = (req, res) =>
+            {
+                cookiesCollection = res.Cookies;
+                headersCollection = res.Headers;
+            };
+
+
             while (next_btn_href != "" && next_btn_href != null)
             {
-                string nexyPage_url = _ReedLinks[0].DomainURL + "/" + next_btn_href;
-                var new_document = await _web_client.LoadFromWebAsync(nexyPage_url);
+                
+                var new_document = _web_client.Load(next_btn_href);
                 var job_nodes_other_pages = new_document.DocumentNode.SelectNodes("//article[contains(@id, 'job-')]").Where(item => item.Id != "" && item.Id != null).ToList();
                 job_nodes.AddRange(job_nodes_other_pages);
+
+                // PreRequest:
+                _web_client.PreRequest = req =>
+                {
+                    req.CookieContainer = cookieContainer;
+                    req.Headers = headersCollection;
+                    req.Headers.Remove("Referer");
+                    req.Headers.Add("Referer", next_btn_href);
+                    return true;
+                };
+                // PostResponse :
+                _web_client.PostResponse = (req, res) =>
+                {
+                    cookiesCollection = res.Cookies;
+                    headersCollection = res.Headers;
+                };
 
                 next_btn_href = this.getNextPageUrl(new_document);
             }
